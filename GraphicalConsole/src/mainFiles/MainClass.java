@@ -2,6 +2,7 @@ package mainFiles;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -275,6 +276,50 @@ public class MainClass extends JFrame
 
 	}
 	
+	/**
+	 * Sets the foreground color of the panel
+	 * @param newColor 
+	 */
+	public void setFontColor(Color newColor)
+	{
+		chatLog.setForeground(newColor);
+		chatLog.setCaretColor(newColor);
+		sendInputButton.setBackground(newColor);
+		messageInput.setForeground(newColor);
+		
+	}
+	/**
+	 * Sets the background color of the new panel
+	 * @param newColor
+	 */
+	public void setBackgroundColor(Color newColor)
+	{
+		chatLog.setBackground(newColor);
+		lowerPanel.setBackground(newColor);
+		Color dialC = newColor.darker();
+		messageInput.setBackground(dialC);
+	}
+	/**
+	 * Sets the chat log font to the specified type. If what was given
+	 * is not a valid font it returns false.
+	 * @param newFont the new font name
+	 * @return true or false
+	 */
+	public boolean setFontType(String newFont)
+	{
+		String[] allFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+		for(int i = 0; i < allFonts.length; i++)
+		{
+			if(allFonts[i].equalsIgnoreCase(newFont))//if what they typed equals a font type
+			{
+				//set that font and return true
+				chatLog.setFont(new Font(allFonts[i], font.PLAIN, 12));
+				return true;
+			}
+		}
+		//if we got here thats because no fonts matched so return false
+		return false;
+	}
 
 	//Main method
 	public static void main(String args[])

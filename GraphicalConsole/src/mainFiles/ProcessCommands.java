@@ -39,7 +39,7 @@ public class ProcessCommands implements Runnable {
 		programList.add(new ArduinoCommunication(theClass));
 
 	}
-	
+
 
 	/**
 	 * Process the input from the user and check to see if they are a command
@@ -55,7 +55,7 @@ public class ProcessCommands implements Runnable {
 				break;//we will run only one program at start
 			}
 		}
-		
+
 		//This runs when it is first started
 		theClass.addToChatLog("Welcome to the program!");
 		theClass.addToChatLog("Type /help if you want a list of commands,");
@@ -89,20 +89,9 @@ public class ProcessCommands implements Runnable {
 					theClass.addToChatLog(" ");//leave some space to make it look pretty
 				}
 			}
-			else if(theInput.contains("/setColor"))
+			else if(theInput.contains("/setcolor"))
 			{
-				String input;
-			//	Color newColor;
-				theClass.addToChatLog("Type in the new color");
-				input = theClass.waitForInput();
-				if(input.equalsIgnoreCase("red"))
-				{
-					theClass.chatLog.setForeground(Color.red);
-				}
-				else
-				{
-					theClass.addToChatLog("That is not a recognized color");
-				}
+				cfSettings();
 			}
 			else //if it was not a built in function then lets go through the programs list 
 			{
@@ -118,6 +107,80 @@ public class ProcessCommands implements Runnable {
 			}
 		}
 	}
+
+	/**
+	 * color and font settings method
+	 */
+	private void cfSettings()
+	{
+		String input;
+
+		Color newColorF;
+		Color newColorB;
+		Color oldColorF = theClass.forgroundColor;
+		Color oldColorB = theClass.backgroundColor;
+		int r = 0;
+		int g = 0;
+		int b = 0;
+		//setting the forground color
+		while(true)
+		{
+			theClass.addToChatLog("~Setting foreground Color~");
+			r = rgbCheck(r, "red");
+			g = rgbCheck(g, "green");
+			b = rgbCheck(b, "blue");
+			newColorF = new Color(r,g,b);
+			//setting the background color
+			theClass.addToChatLog("~Setting background Color~");
+			r = rgbCheck(r, "red");
+			g = rgbCheck(g, "green");
+			b = rgbCheck(b, "blue");
+			newColorB = new Color(r,g,b);
+
+			theClass.addToChatLog("~Setings new Colors~");
+			theClass.setFontColor(newColorF);
+			theClass.setBackgroundColor(newColorB);
+
+			theClass.addToChatLog("Do you want to keep these colors? (Y/N");
+			input = theClass.waitForInput();
+			if(input.equalsIgnoreCase("y"))
+			{
+				theClass.addToChatLog("~Colors Changed~");
+				break;
+			}
+			else
+			{
+				theClass.addToChatLog("Colors reverted");
+				theClass.setBackgroundColor(oldColorB);
+				theClass.setFontColor(oldColorF);
+				break;
+			}
+		}
+	}
+	/**
+	 * checks to see if the colors given are within range
+	 * @param col color value
+	 * @param name color name
+	 * @return a value between 0 and 255
+	 */
+	private int rgbCheck(int col, String name)
+	{
+		while(true)
+		{
+			theClass.addToChatLog("Type in the "+name + " value");
+			col = theClass.waitForInputInt();
+			if(col == -1 || col > 255)
+			{
+				theClass.addToChatLog("Value was out of range or not recognized");
+			}
+			else
+			{
+				break;
+			}
+		}
+		return col;
+	}
+
 	/**
 	 * Runs the thread
 	 */
