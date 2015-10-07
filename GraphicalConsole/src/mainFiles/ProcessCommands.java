@@ -4,6 +4,8 @@ import gameFunctions.id2013.TarotCardDealer;
 import gameFunctions.id2013.TicTacToeGame;
 import gameFunctions.id2013.Blindman.Main2;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 import utilityFunctions.ArduinoCommunication;
@@ -85,6 +87,21 @@ public class ProcessCommands implements Runnable {
 					theClass.addToChatLog("Author: " + programList.get(i).author);
 					theClass.addToChatLog("Description: " + programList.get(i).description);//displays description
 					theClass.addToChatLog(" ");//leave some space to make it look pretty
+				}
+			}
+			else if(theInput.contains("/setColor"))
+			{
+				String input;
+			//	Color newColor;
+				theClass.addToChatLog("Type in the new color");
+				input = theClass.waitForInput();
+				if(input.equalsIgnoreCase("red"))
+				{
+					theClass.chatLog.setForeground(Color.red);
+				}
+				else
+				{
+					theClass.addToChatLog("That is not a recognized color");
 				}
 			}
 			else //if it was not a built in function then lets go through the programs list 
