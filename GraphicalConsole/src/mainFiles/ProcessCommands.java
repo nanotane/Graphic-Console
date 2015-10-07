@@ -4,7 +4,6 @@ import gameFunctions.id2013.TarotCardDealer;
 import gameFunctions.id2013.TicTacToeGame;
 import gameFunctions.id2013.Blindman.Main2;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import utilityFunctions.ArduinoCommunication;
@@ -26,6 +25,7 @@ public class ProcessCommands implements Runnable {
 	public ProcessCommands(MainClass a)
 	{
 		theClass = a;
+		//if you want to add a new program, add it here
 		programList.add(new ResisterCalc(theClass));
 		programList.add(new DiceCalc(theClass));
 		programList.add(new BasicCalc(theClass));
@@ -44,6 +44,16 @@ public class ProcessCommands implements Runnable {
 	 */
 	public void checkForCommand()
 	{
+		//Lets check to see if a program is going to see if a program wants to run at start up
+		for(int i = 0; i < programList.size(); i++)
+		{
+			if(programList.get(i).runAtStart)
+			{
+				programList.get(i).run();
+				break;//we will run only one program at start
+			}
+		}
+		
 		//This runs when it is first started
 		theClass.addToChatLog("Welcome to the program!");
 		theClass.addToChatLog("Type /help if you want a list of commands,");

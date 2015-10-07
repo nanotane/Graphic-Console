@@ -28,9 +28,6 @@ import javax.swing.border.Border;
  */
 public class MainClass extends JFrame
 {
-	/**
-	 * 
-	 */
 	public String version = "0.6.0";
 	private static final long serialVersionUID = 89L;
 	protected final int MAX_X = 620;
@@ -43,6 +40,7 @@ public class MainClass extends JFrame
 	protected JScrollPane scrollypolly;
 	protected String lastUserInput;
 	protected boolean newInput = false;
+	
 	//This is a special string that indicates that we do not have new input
 	protected String noInputString = "#$%NO%$#";//This is a weird sequence of characters so that way we know a user didnt type it
 	protected Color forgroundColor = new Color(255, 247, 74);
@@ -50,9 +48,6 @@ public class MainClass extends JFrame
 	protected Font font = new Font("Verdana", Font.PLAIN, 12);//setting the font size and style
 	protected Color backgroundColor = Color.black;
 	
-//	protected ResisterCalc rco;
-//	protected DiceCalc dicecal;
-	//####
 	protected ProcessCommands theCommands = new ProcessCommands(this);//this is needed 
 	/*
 	 * These are the strings that determine the names of certain components 
@@ -79,10 +74,6 @@ public class MainClass extends JFrame
 		//setting up the fields that will be used to declare the other JComponents
 		initComponents();
 		initComponentFunctions();
-		
-		//creating the calculating objects
-		//addFunctions();
-		
 		commandThread.start();
 	}
 
@@ -94,9 +85,6 @@ public class MainClass extends JFrame
 
 		lowerPanel = new JPanel();
 		lowerPanel.setBackground(backgroundColor);
-
-		
-		//		lowerPanelRight = new JPanel();
 		sendInputButton = new JButton(name_Button1);
 		
 		Border empty = BorderFactory.createEmptyBorder();//This is used to create an empty border for the gui
@@ -150,18 +138,11 @@ public class MainClass extends JFrame
 		
 		
 		lowerPanel.setLayout(new GridLayout(2,0, 0, 5));//Contains the lowerPanelbuttons and the inputmessage
-//		lowerPanel2.setLayout(new GridLayout(1,0, 10, 8));//(rows, Columns, horizontal gap, vertical gap)
-//		upperPanel.setLayout(new GridLayout(2, 0, 0, 5));
-//		upperPanel2.setLayout(new GridLayout(1, 0, 10, 8)); TODO
 
 		//setting colors
 		sendInputButton.setBackground(forgroundColor);
 		//adding panels
-//		this.add("North", upperPanel);
 		lowerPanel.add(messageInput);
-//		lowerPanel.add(lowerPanel2);
-//		upperPanel.add(upperPanel2);
-		//		upperPanel.add(chatLog);
 		//adding components to the second panel
 		lowerPanel.add(sendInputButton);
 		//adding  components to the upper panel
@@ -261,7 +242,7 @@ public class MainClass extends JFrame
 	public int waitForInputInt()
 	{
 		String theInput = "%%%%ERROR%%%";//if this is somehow returned then there is a problem!!
-		int theInputInt = -1;
+		int theInputInt;
 		while(true)
 		{
 			try {
@@ -284,7 +265,7 @@ public class MainClass extends JFrame
 				catch(InputMismatchException e)
 				{
 					//if not then we will return a -1 since most people would probably not be looking for that number hopefuly
-					
+					theInputInt = -1;
 				}
 				break;
 			}

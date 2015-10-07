@@ -3,7 +3,7 @@ import mainFiles.MainClass;
 import mainFiles.Program;
 /**
  * 
- * @author Jospeh C
+ * @author Joseph C
  *
  */
 public class TicTacToeGame extends Program {
