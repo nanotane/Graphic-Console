@@ -64,7 +64,7 @@ public class MainClass extends JFrame
 
 	/**
 	 * This constructor will draw the console and run the initilizing functions.
-	 * Then it will run the command thread and print out the welcome message
+	 * Then it will run the command thread 
 	 */
 	public MainClass()
 	{
@@ -79,23 +79,16 @@ public class MainClass extends JFrame
 		//setting up the fields that will be used to declare the other JComponents
 		initComponents();
 		initComponentFunctions();
-		chatLog.append("Welcome to the program!" + newLine);
-		chatLog.append("Type /help if you want a list of commands," + newLine);
-		chatLog.append("Type in information into the grey space and then click Enter" + newLine);
-		chatLog.append("or hit the enter key on your keyboard" + newLine);
+		
 		//creating the calculating objects
 		//addFunctions();
 		
 		commandThread.start();
 	}
-	//This is used to load the functions to the jpanel
-//	public void addFunctions()
-//	{
-//		rco = new ResisterCalc(this);
-//		dicecal = new DiceCalc(this);
-//	}
-	//This initializes the JComponents and sets up their properties as well as 
-	//where they are on the GUI
+
+	/**
+	 * Init the different Jcomponents
+	 */
 	public void initComponents()
 	{
 
@@ -208,11 +201,11 @@ public class MainClass extends JFrame
 			return lastUserInput;
 		}
 		else
-			return "#$%NO%$#";//#$%NO%$# is used as a special symbol to indicate that we do not have new information
+			return "#$%NO%$#";//#$%NO%$# is used as a special string to indicate that we do not have new information
 	}
 	/**
 	 * Adds somethings to the chat lof
-	 * @param stuff Strings u want to add to the screen
+	 * @param stuff Strings you want to add to the screen
 	 */
 	public void addToChatLog(String stuff)
 	{
@@ -222,7 +215,7 @@ public class MainClass extends JFrame
 	
 	/**
 	 * Adds something to the chat log without adding a new line
-	 * @param stuff Strings u want to add to the screen
+	 * @param stuff Strings you want to add to the screen
 	 */
 	public void addToChatLogsl(String stuff)
 	{

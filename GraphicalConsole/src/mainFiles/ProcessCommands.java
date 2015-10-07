@@ -16,11 +16,11 @@ import calculatingFunctions.StringBinaryConverter;
 public class ProcessCommands implements Runnable {
 
 	private MainClass theClass;
-
+	private String theInput = "";
 	private ArrayList<Program> programList = new ArrayList<Program>();
 	/**
-	 * Creates command objects and puts them into an arraylist
-	 * @param a
+	 * Creates command objects and puts them into an array list
+	 * @param a the MainClass object that this is pointing to
 	 */
 	public ProcessCommands(MainClass a)
 	{
@@ -36,13 +36,18 @@ public class ProcessCommands implements Runnable {
 		programList.add(new ArduinoCommunication(theClass));
 
 	}
-	private String theInput = "";
+	
 
 	/**
 	 * Process the input from the user and check to see if they are a command
 	 */
 	public void checkForCommand()
 	{
+		//This runs when it is first started
+		theClass.addToChatLog("Welcome to the program!");
+		theClass.addToChatLog("Type /help if you want a list of commands,");
+		theClass.addToChatLog("Type in information into the grey space and then click Enter");
+		theClass.addToChatLog("or hit the enter key on your keyboard");
 		//Lets continualy check if the user typed in a help command
 		//if they did then we will pause the thread until that changes
 		while(true)
@@ -86,22 +91,10 @@ public class ProcessCommands implements Runnable {
 		}
 	}
 	/**
-	 * This checks to see if the size of a string is the correct length and will fit on the screen
-	 * properly. If it is too long then it will add
-	 * new line characters to the string. Not mandatory but keeps the screen looking nice
-	 * @return a reformatted string
-	 */
-	public String descCheck(String a)
-	{
-		return null;
-	}
-	/**
 	 * Runs the thread
 	 */
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		//System.out.println("running thread");
 		checkForCommand();
 
 	}

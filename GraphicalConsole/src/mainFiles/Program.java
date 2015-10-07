@@ -1,6 +1,6 @@
 package mainFiles;
 
-public class Program 
+public class Program implements RunCommand
 {
 	protected MainClass theClass;
 	public String description = "";
@@ -12,9 +12,13 @@ public class Program
 	{
 		theClass = a;
 	}
-	
-	public void run()
-	{
-		theClass.addToChatLog("THE PROGRAM " + name + "HAS NOT SET UP A RUN METHOD!");
+	/**
+	 * Is called when the program is supposed to run and should
+	 * contain the relavent code
+	 */
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 }
