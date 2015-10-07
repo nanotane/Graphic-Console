@@ -59,7 +59,7 @@ public class MainClass extends JFrame
 	 * in the GUI
 	 */
 	protected String name_Button1 = "Enter";
-	protected String name_JPane_Title = "Multi tool";
+	protected String name_JPane_Title = "Graphical Console";
 	protected Thread commandThread = new Thread(theCommands);
 
 	/**
