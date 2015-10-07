@@ -1,4 +1,7 @@
-package mainFiles;
+package calculatingFunctions;
+
+import mainFiles.MainClass;
+import mainFiles.Program;
 
 public class ResisterCalc extends Program
 {

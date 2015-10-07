@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import utilityFunctions.ArduinoCommunication;
 import utilityFunctions.DiceCalc;
 import calculatingFunctions.BasicCalc;
+import calculatingFunctions.ResisterCalc;
 import calculatingFunctions.SimpleConverter;
 import calculatingFunctions.StringBinaryConverter;
 
