@@ -314,11 +314,24 @@ public class MainClass extends JFrame
 			{
 				//set that font and return true
 				chatLog.setFont(new Font(allFonts[i], font.PLAIN, 12));
+				messageInput.setFont(new Font(allFonts[i], font.PLAIN, 12));
 				return true;
 			}
 		}
 		//if we got here thats because no fonts matched so return false
 		return false;
+	}
+	/**
+	 * Prints out all of the fonts available 
+	 */
+	public void printFonts()
+	{
+		String fonts[] = 
+				GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+		for(int i = 0; i < fonts.length; i++)
+		{
+			addToChatLog(fonts[i]);
+		}
 	}
 
 	//Main method

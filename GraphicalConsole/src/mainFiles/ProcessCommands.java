@@ -5,7 +5,6 @@ import gameFunctions.id2013.TicTacToeGame;
 import gameFunctions.id2013.Blindman.Main2;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.util.ArrayList;
 
 import utilityFunctions.ArduinoCommunication;
@@ -66,8 +65,8 @@ public class ProcessCommands implements Runnable {
 		while(true)
 		{
 			theInput = theClass.waitForInput();//This will wait for input then store it in theInput when it arrives
-			//if what they typed in was a built in command like help or info
-			if(theInput.contains("/info"))//This needs to be the last check. If we found a / then it wasnt a command
+			
+			if(theInput.contains("/info"))//get the info for the program
 			{
 				theClass.addToChatLog("-------------------------------");
 				theClass.addToChatLog("Multi Function Console Program");
@@ -77,7 +76,7 @@ public class ProcessCommands implements Runnable {
 				theClass.addToChatLog("please consult the appropriate class files");
 				theClass.addToChatLog("--------------------------------");
 			}
-			else if(theInput.contains("/help"))//This needs to be the last check. If we found a / then it wasnt a command
+			else if(theInput.contains("/help"))//run through the programs list and print out authors, commands, etc.
 			{
 
 				for(int i = 0; i < programList.size(); i++)
@@ -89,9 +88,17 @@ public class ProcessCommands implements Runnable {
 					theClass.addToChatLog(" ");//leave some space to make it look pretty
 				}
 			}
-			else if(theInput.contains("/setcolor"))
+			else if(theInput.contains("/setcolor"))//setting the colors
 			{
+				theClass.addToChatLog("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 				cpSettings();
+				theClass.addToChatLog("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			}
+			else if(theInput.contains("/setfont"))//setting the font type
+			{
+				theClass.addToChatLog("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+				fontSettings();
+				theClass.addToChatLog("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			}
 			else //if it was not a built in function then lets go through the programs list 
 			{
@@ -121,9 +128,10 @@ public class ProcessCommands implements Runnable {
 		int r = 0;
 		int g = 0;
 		int b = 0;
-		//setting the forground color
+		
 		while(true)
 		{
+			//setting the forground color
 			theClass.addToChatLog("~Setting foreground Color~");
 			r = rgbCheck(r, "red");
 			g = rgbCheck(g, "green");
@@ -136,6 +144,7 @@ public class ProcessCommands implements Runnable {
 			b = rgbCheck(b, "blue");
 			newColorB = new Color(r,g,b);
 
+			//change to new colors
 			theClass.addToChatLog("~Setings new Colors~");
 			theClass.setFontColor(newColorF);
 			theClass.setBackgroundColor(newColorB);
@@ -149,6 +158,7 @@ public class ProcessCommands implements Runnable {
 			}
 			else
 			{
+				//if they want the old colors, change it back
 				theClass.addToChatLog("Colors reverted");
 				theClass.setBackgroundColor(oldColorB);
 				theClass.setFontColor(oldColorF);
@@ -157,7 +167,7 @@ public class ProcessCommands implements Runnable {
 		}
 	}
 	/**
-	 * checks to see if the colors given are within range
+	 * checks to see if the color values given are within range
 	 * @param col color value
 	 * @param name color name
 	 * @return a value between 0 and 255
@@ -178,6 +188,61 @@ public class ProcessCommands implements Runnable {
 			}
 		}
 		return col;
+	}
+	
+	/**
+	 * Allow user to see available fonts and choose from list
+	 */
+	private void fontSettings()
+	{
+		//first lets grab all available fonts if they want to view them
+
+		String input;
+		String oldFont = theClass.font.getFontName();//this will store the old font if we want to revert
+		/*
+		 * The idea is that the user will be able to type in a font immedietly if they already know what they want.
+		 * if not then they can list off all fonts available. 
+		 */
+		theClass.addToChatLog("Type in a font that you would like");
+		theClass.addToChatLog("type 'showfonts' to display all fonts");
+		theClass.addToChatLog("type 'save' to save current settings and exit");
+		theClass.addToChatLog("type 'revert' to revert to the original font and exit");
+		theClass.addToChatLog("You can keep switching fonts until you find one you like");
+		theClass.addToChatLog("Font names are case sensitive");
+		while(true)
+		{
+			input = theClass.waitForInput();
+			
+			if(input.equals("showfonts"))//print out all the fonts
+			{
+				theClass.addToChatLog("~Fetching Fonts...~");
+				theClass.printFonts();
+			}
+			else if(input.equals("save"))//save the current font
+			{
+				theClass.addToChatLog("~Font change Saved~");
+				break;
+			}
+			else if(input.equals("revert"))//revert to the original font
+			{
+				theClass.addToChatLog("~Font Reverted~");
+				theClass.setFontType(oldFont);
+			}
+			else//if its not a command lets see if it is a font type
+			{
+				if(theClass.setFontType(input))
+				{
+					theClass.addToChatLog("~Font changed~");
+				}
+				else
+				{
+					theClass.addToChatLog("~Unrecognized font~");
+				}
+				
+			}
+			
+		}
+		
 	}
 
 	/**
