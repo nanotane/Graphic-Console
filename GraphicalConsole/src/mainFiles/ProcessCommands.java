@@ -123,7 +123,7 @@ public class ProcessCommands implements Runnable {
 
 		Color newColorF;
 		Color newColorB;
-		Color oldColorF = theClass.forgroundColor;
+		Color oldColorF = theClass.forgroundColor;//lets grab the old colors
 		Color oldColorB = theClass.backgroundColor;
 		int r = 0;
 		int g = 0;
@@ -196,7 +196,6 @@ public class ProcessCommands implements Runnable {
 	private void fontSettings()
 	{
 		//first lets grab all available fonts if they want to view them
-
 		String input;
 		String oldFont = theClass.font.getFontName();//this will store the old font if we want to revert
 		/*
@@ -204,11 +203,10 @@ public class ProcessCommands implements Runnable {
 		 * if not then they can list off all fonts available. 
 		 */
 		theClass.addToChatLog("Type in a font that you would like");
-		theClass.addToChatLog("type 'showfonts' to display all fonts");
-		theClass.addToChatLog("type 'save' to save current settings and exit");
-		theClass.addToChatLog("type 'revert' to revert to the original font and exit");
+		theClass.addToChatLog("Type 'showfonts' to display all fonts");
+		theClass.addToChatLog("Type 'save' to save current settings and exit");
+		theClass.addToChatLog("Type 'revert' to revert to the original font");
 		theClass.addToChatLog("You can keep switching fonts until you find one you like");
-		theClass.addToChatLog("Font names are case sensitive");
 		while(true)
 		{
 			input = theClass.waitForInput();
@@ -221,7 +219,7 @@ public class ProcessCommands implements Runnable {
 			else if(input.equals("save"))//save the current font
 			{
 				theClass.addToChatLog("~Font change Saved~");
-				break;
+				break;//now lets exit the loop
 			}
 			else if(input.equals("revert"))//revert to the original font
 			{
@@ -237,12 +235,9 @@ public class ProcessCommands implements Runnable {
 				else
 				{
 					theClass.addToChatLog("~Unrecognized font~");
-				}
-				
-			}
-			
+				}	
+			}	
 		}
-		
 	}
 
 	/**
