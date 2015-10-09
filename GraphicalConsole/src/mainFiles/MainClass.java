@@ -333,7 +333,31 @@ public class MainClass extends JFrame
 			addToChatLog(fonts[i]);
 		}
 	}
-
+	/**
+	 * Adds a a special string to the front and to the back
+	 * of the message that will be printed out. If bothSides
+	 * is set to false will only print to the front of the message
+	 * Sets carrot to the next line.
+	 * @param stuff the content of the string
+	 * @param special the special string to be added to the front and back
+	 * @param bothSides should we put the special on both sides?
+	 */
+	public void addToChatLog(String stuff, String special, boolean bothSides)
+	{
+		if(bothSides)
+		{
+			chatLog.append(special + stuff  + special + newLine);
+			chatLog.setCaretPosition(chatLog.getDocument().getLength());
+		}
+		else
+		{
+			chatLog.append(special + stuff + newLine);
+			chatLog.setCaretPosition(chatLog.getDocument().getLength());
+		}
+		
+	}
+	
+	
 	//Main method
 	public static void main(String args[])
 	{
