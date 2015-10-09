@@ -91,7 +91,7 @@ public class ProcessCommands implements Runnable {
 			}
 			else if(theInput.contains("/setcolor"))
 			{
-				cfSettings();
+				cpSettings();
 			}
 			else //if it was not a built in function then lets go through the programs list 
 			{
@@ -107,11 +107,10 @@ public class ProcessCommands implements Runnable {
 			}
 		}
 	}
-
 	/**
-	 * color and font settings method
+	 * Precise color settings method
 	 */
-	private void cfSettings()
+	private void cpSettings()
 	{
 		String input;
 
