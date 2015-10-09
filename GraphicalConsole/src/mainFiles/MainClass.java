@@ -24,12 +24,12 @@ import javax.swing.border.Border;
 
 /**
  * @author Ian Davila
- * @version 0.6.0
+ * @version 0.6.1
  *
  */
 public class MainClass extends JFrame
 {
-	public String version = "0.6.0";
+	public String version = "0.6.1";
 	private static final long serialVersionUID = 89L;
 	protected final int MAX_X = 620;
 	protected final int MAX_Y = 400;
