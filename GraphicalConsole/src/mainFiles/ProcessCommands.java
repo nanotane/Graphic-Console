@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import utilityFunctions.ArduinoCommunication;
 import utilityFunctions.DiceCalc;
 import calculatingFunctions.BasicCalc;
-import calculatingFunctions.ResisterCalc;
+import calculatingFunctions.ResistorCalc;
 import calculatingFunctions.SimpleConverter;
 import calculatingFunctions.StringBinaryConverter;
 
@@ -27,7 +27,7 @@ public class ProcessCommands implements Runnable {
 	{
 		theClass = a;
 		//if you want to add a new program, add it here
-		programList.add(new ResisterCalc(theClass));
+		programList.add(new ResistorCalc(theClass));
 		programList.add(new DiceCalc(theClass));
 		programList.add(new BasicCalc(theClass));
 		programList.add(new SimpleConverter(theClass));

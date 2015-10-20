@@ -3,11 +3,11 @@ package calculatingFunctions;
 import mainFiles.MainClass;
 import mainFiles.Program;
 
-public class ResisterCalc extends Program
+public class ResistorCalc extends Program
 {
 	//Constructor
-	
-	public ResisterCalc(MainClass a)
+
+	public ResistorCalc(MainClass a)
 	{
 		super(a);
 		this.author = "Ian Davila";
@@ -16,7 +16,7 @@ public class ResisterCalc extends Program
 		this.command = "/resistor";
 	}
 	//Begin calculating the resister values
-	public void calcResisterValue()
+	public void calcResistorValue()
 	{
 		double digit1;
 		double digit2;
@@ -24,122 +24,133 @@ public class ResisterCalc extends Program
 		double toleranceVal;
 		double totalOhms;
 		String theInput = theClass.checkForInput();
-		theClass.addToChatLog("New Resister Calculation");
-		theClass.addToChatLog("Type in the color of the first band");
-		//This loop keeps asking for input until a correct value is put in
-		while(true)
-		{//wait for new input
-			while(true)
-			{
-				theInput = theClass.checkForInput();
-				if(theInput.equalsIgnoreCase("#$%NO%$#"))
-				{
-
-				}
-				else
-				{
-					break;
-				}
-			}
-
-			digit1 = colorValue(theInput, false);
-			if(digit1 ==  -1)
-			{
-				theClass.addToChatLog("Please input a correct color");
-			}
-			else
-			{
-				break;
-			}
-		}
-
-
-		theClass.addToChatLog("Type in the color of the second band");
+		theClass.addToChatLog("New Resistor Calculation");
 		while(true)
 		{
-			//wait for new input
-			while(true)
-			{
-				theInput = theClass.checkForInput();
-				if(theInput.equalsIgnoreCase("#$%NO%$#"))
-				{
 
+
+			theClass.addToChatLog("Type in the color of the first band");
+			//This loop keeps asking for input until a correct value is put in
+			while(true)
+			{//wait for new input
+				while(true)
+				{
+					theInput = theClass.checkForInput();
+					if(theInput.equalsIgnoreCase("#$%NO%$#"))
+					{
+
+					}
+					else
+					{
+						break;
+					}
+				}
+
+				digit1 = colorValue(theInput, false);
+				if(digit1 ==  -1)
+				{
+					theClass.addToChatLog("Please input a correct color");
 				}
 				else
 				{
 					break;
 				}
 			}
-			digit2 = colorValue(theInput, false);
-			if(digit2 ==  -1)
-			{
-				theClass.addToChatLog("Please input a correct color");
-			}
-			else
-			{
-				break;
-			}
-		}
 
 
-		theClass.addToChatLog("Type in the color of the third band");
-		while(true)
-		{
-			//wait for new input
+			theClass.addToChatLog("Type in the color of the second band");
 			while(true)
 			{
-				theInput = theClass.checkForInput();
-				if(theInput.equalsIgnoreCase("#$%NO%$#"))
+				//wait for new input
+				while(true)
 				{
+					theInput = theClass.checkForInput();
+					if(theInput.equalsIgnoreCase("#$%NO%$#"))
+					{
 
+					}
+					else
+					{
+						break;
+					}
+				}
+				digit2 = colorValue(theInput, false);
+				if(digit2 ==  -1)
+				{
+					theClass.addToChatLog("Please input a correct color");
 				}
 				else
 				{
 					break;
 				}
 			}
-			multiplerVal = colorValue(theInput, true);
-			if(multiplerVal ==  -1)
-			{
-				theClass.addToChatLog("Please input a correct color");
-			}
-			else
-			{
-				break;
-			}
-		}
 
-		theClass.addToChatLog("Type in the color of the fourth band");
-		while(true)
-		{
-			//wait for new input
+
+			theClass.addToChatLog("Type in the color of the third band");
 			while(true)
 			{
-				theInput = theClass.checkForInput();
-				if(theInput.equalsIgnoreCase("#$%NO%$#"))
+				//wait for new input
+				while(true)
 				{
+					theInput = theClass.checkForInput();
+					if(theInput.equalsIgnoreCase("#$%NO%$#"))
+					{
 
+					}
+					else
+					{
+						break;
+					}
+				}
+				multiplerVal = colorValue(theInput, true);
+				if(multiplerVal ==  -1)
+				{
+					theClass.addToChatLog("Please input a correct color");
 				}
 				else
 				{
 					break;
 				}
 			}
-			toleranceVal = colorValue(theInput, false);
-			if(toleranceVal ==  -1)
+
+			theClass.addToChatLog("Type in the color of the fourth band");
+			while(true)
 			{
-				theClass.addToChatLog("Please input a correct color");
+				//wait for new input
+				while(true)
+				{
+					theInput = theClass.checkForInput();
+					if(theInput.equalsIgnoreCase("#$%NO%$#"))
+					{
+
+					}
+					else
+					{
+						break;
+					}
+				}
+				toleranceVal = colorValue(theInput, false);
+				if(toleranceVal ==  -1)
+				{
+					theClass.addToChatLog("Please input a correct color");
+				}
+				else
+				{
+					break;
+				}
 			}
-			else
+			//Calculating the ohms value
+			totalOhms = ((digit1 * 10) + digit2)*multiplerVal;
+			String finalAnswer = "" + totalOhms + " +/- " + toleranceVal + "%";
+			theClass.addToChatLog("Resistance is:");
+			theClass.addToChatLog(finalAnswer);
+			theClass.addToChatLog("Do you want to type another calculation?");
+			theInput = theClass.waitForInput();
+			if(!theInput.equalsIgnoreCase("yes"))
 			{
 				break;
 			}
 		}
-		//Calculating the ohms value
-		totalOhms = ((digit1 * 10) + digit2)*multiplerVal;
-		String finalAnswer = "" + totalOhms + " +/- " + toleranceVal + "%";
-		theClass.addToChatLog("Resistance is:");
-		theClass.addToChatLog(finalAnswer);
 	}
 	//Determine what value the color means
 	public double colorValue(String bandColor, boolean isMulti)
@@ -293,6 +304,7 @@ public class ResisterCalc extends Program
 		{
 			return -1; // return this if what ever color they gave was not the right color
 		}
+
 	}
 
 	public void processInput()
@@ -304,11 +316,11 @@ public class ResisterCalc extends Program
 
 		}
 	}
-	
+
 	@Override
 	public void run()
 	{
-		calcResisterValue();
+		calcResistorValue();
 	}
 
 }
