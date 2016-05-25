@@ -1,9 +1,9 @@
 package calculatingFunctions;
 
 import mainFiles.MainClass;
-import mainFiles.Program;
+import mainFiles.Plugin;
 
-public class BasicCalc extends Program
+public class BasicCalc extends Plugin
 {
 	private String[] operators = {"+", "-", "*", "/", "^" };
 	public BasicCalc(MainClass a)
@@ -124,8 +124,6 @@ public class BasicCalc extends Program
 			}
 			
 			//now print out the answer if we can
-			
-			
 			indexOp = -1;
 		}
 	}

@@ -2,13 +2,13 @@ package gameFunctions.id2013;
 import java.util.Random;
 
 import mainFiles.MainClass;
-import mainFiles.Program;
+import mainFiles.Plugin;
 /**
  * 
  * @author Jonathan G
  *
  */
-public class TarotCardDealer extends Program{//This program generates random Tarot cards and gives the according fortune
+public class TarotCardDealer extends Plugin{//This program generates random Tarot cards and gives the according fortune
 
 	/**
 	 * @param args

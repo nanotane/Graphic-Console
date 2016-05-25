@@ -1,13 +1,13 @@
 package gameFunctions.id2013.Blindman;
 import mainFiles.MainClass;
-import mainFiles.Program;
+import mainFiles.Plugin;
 //to do:make boxes work,create new levels, music?
 /**
  * 
  * @author Sirkorski
  *
  */
-public class Main2 extends Program
+public class Main2 extends Plugin
 {
 //	Scanner kbreader = new Scanner(System.in);
 	String s1 = "yes";

@@ -1,9 +1,9 @@
 package calculatingFunctions;
 
 import mainFiles.MainClass;
-import mainFiles.Program;
+import mainFiles.Plugin;
 
-public class ResistorCalc extends Program
+public class ResistorCalc extends Plugin
 {
 	//Constructor
 

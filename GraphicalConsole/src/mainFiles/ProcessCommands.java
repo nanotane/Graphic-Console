@@ -1,24 +1,16 @@
 package mainFiles;
 
-import gameFunctions.id2013.TarotCardDealer;
-import gameFunctions.id2013.TicTacToeGame;
-import gameFunctions.id2013.Blindman.Main2;
 
 import java.awt.Color;
 import java.util.ArrayList;
 
-import utilityFunctions.DiceCalc;
-import calculatingFunctions.BasicCalc;
-import calculatingFunctions.ResistorCalc;
-import calculatingFunctions.SimpleConverter;
-import calculatingFunctions.StringBinaryConverter;
 
 public class ProcessCommands implements Runnable {
 
 	private MainClass theClass;
 	private String theInput = "";
-	private ArrayList<Program> programList = new ArrayList<Program>();
-	private ProgramLoader loader = new ProgramLoader();
+	private ArrayList<Plugin> programList = new ArrayList<Plugin>();
+	private PluginLoader loader = new PluginLoader();
 	/**
 	 * Creates command objects and puts them into an array list
 	 * @param a the MainClass object that this is pointing to

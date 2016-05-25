@@ -1,12 +1,12 @@
 package gameFunctions.id2013;
 import mainFiles.MainClass;
-import mainFiles.Program;
+import mainFiles.Plugin;
 /**
  * 
  * @author Joseph C
  *
  */
-public class TicTacToeGame extends Program {
+public class TicTacToeGame extends Plugin {
 
 	/**
 	 * @param args

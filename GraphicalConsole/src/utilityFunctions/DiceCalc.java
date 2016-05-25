@@ -1,9 +1,9 @@
 package utilityFunctions;
 
 import mainFiles.MainClass;
-import mainFiles.Program;
+import mainFiles.Plugin;
 
-public class DiceCalc extends Program
+public class DiceCalc extends Plugin
 {
 	public DiceCalc(MainClass a)
 	{

@@ -9,13 +9,13 @@
 
 package calculatingFunctions;
 import mainFiles.MainClass;
-import mainFiles.Program;
+import mainFiles.Plugin;
 /**
  * This program converts units, speed, length, and volume.
  * @author Harry Dodwell
  * July 2015
  */
-public class SimpleConverter extends Program
+public class SimpleConverter extends Plugin
 {
 	// array locations                   0         1       2        3       4       5       6
 	private String[] length = {"inches", "feet", "yards", "miles", "cm", "meters", "km" };

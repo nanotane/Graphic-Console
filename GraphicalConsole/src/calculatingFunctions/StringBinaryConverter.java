@@ -5,14 +5,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import mainFiles.MainClass;
-import mainFiles.Program;
+import mainFiles.Plugin;
 /**
  * 
  * @author Luke B
  * @since 2013
  *
  */
-public class StringBinaryConverter extends Program
+public class StringBinaryConverter extends Plugin
 {
 	public StringBinaryConverter(MainClass a)
 	{
