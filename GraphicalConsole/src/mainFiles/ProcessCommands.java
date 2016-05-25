@@ -7,7 +7,6 @@ import gameFunctions.id2013.Blindman.Main2;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import utilityFunctions.ArduinoCommunication;
 import utilityFunctions.DiceCalc;
 import calculatingFunctions.BasicCalc;
 import calculatingFunctions.ResistorCalc;
@@ -19,6 +18,7 @@ public class ProcessCommands implements Runnable {
 	private MainClass theClass;
 	private String theInput = "";
 	private ArrayList<Program> programList = new ArrayList<Program>();
+	private ProgramLoader loader = new ProgramLoader();
 	/**
 	 * Creates command objects and puts them into an array list
 	 * @param a the MainClass object that this is pointing to
@@ -26,17 +26,8 @@ public class ProcessCommands implements Runnable {
 	public ProcessCommands(MainClass a)
 	{
 		theClass = a;
-		//if you want to add a new program, add it here
-		programList.add(new ResistorCalc(theClass));
-		programList.add(new DiceCalc(theClass));
-		programList.add(new BasicCalc(theClass));
-		programList.add(new SimpleConverter(theClass));
-		programList.add(new StringBinaryConverter(theClass));
-		programList.add(new TarotCardDealer(theClass));
-		programList.add(new TicTacToeGame(theClass));
-		programList.add(new Main2(theClass)); //this is the blind man game
-		programList.add(new ArduinoCommunication(theClass));
-
+		//this will load all of the programs and return them in the programlist
+		programList = loader.createAll(theClass);
 	}
 
 

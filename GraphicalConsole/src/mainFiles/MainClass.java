@@ -24,7 +24,7 @@ import javax.swing.border.Border;
 
 /**
  * @author Ian Davila
- * @version 0.6.1
+ * @version 0.6.2
  *
  */
 public class MainClass extends JFrame
