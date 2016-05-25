@@ -13,13 +13,21 @@ while also learning about polymorphism.
 
 All plugins extend the class 'Plugin' and implement the interface 'RunCommand.' 
 Plugins have:
+
 -description
+
 -version
+
 -author
+
 -name
+
 -command (The command to type in to run the plugin)
+
 -runAtStart (A boolean that will force the plugin to run when the console is started)
+
 -theClass (The MainClass object that this plugin points to)
+
 Plugins should (but are not required to) have a start method that contains their relavent code. If most of the code
 was previously in the main method, it should be in here. The run method should only be calling the start method for the plugin to work.
 
