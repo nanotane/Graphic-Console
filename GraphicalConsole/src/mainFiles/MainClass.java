@@ -214,6 +214,7 @@ public class MainClass extends JFrame
 		
 		while(true)
 		{
+			//This seems to solve problem of the thread not letting go of the processor
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
@@ -246,6 +247,7 @@ public class MainClass extends JFrame
 		int theInputInt;
 		while(true)
 		{
+			//This seems to solve problem of the thread not letting go of the processor
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
@@ -253,11 +255,7 @@ public class MainClass extends JFrame
 				e.printStackTrace();
 			}
 			theInput = this.checkForInput();
-			if(theInput.equalsIgnoreCase("#$%NO%$#"))
-			{
-				//if there is not any new inpur then lets just do nothing
-			}
-			else //if there is input lets do stuff
+			if(!theInput.equalsIgnoreCase("#$%NO%$#"))
 			{
 				//Lets try and see if we can turn it into an integer, if not then we disregard the input
 				try{
@@ -271,7 +269,6 @@ public class MainClass extends JFrame
 				break;
 			}
 		}
-
 		return theInputInt;
 
 	}
