@@ -17,7 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.border.Border;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 
 
 
@@ -37,10 +40,11 @@ public class MainClass extends JFrame
 	protected JPanel lowerPanel;//used to contain the buttons for the lower section
 	protected JTextField messageInput;
 	protected JButton sendInputButton;
-	protected JTextArea chatLog;
+	protected JTextPane chatLog;
 	protected JScrollPane scrollypolly;
 	protected String lastUserInput;
 	protected boolean newInput = false;
+	protected StyledDocument chatDoc;
 	
 	//This is a special string that indicates that we do not have new input
 	protected String noInputString = "#$%NO%$#";//This is a weird sequence of characters so that way we know a user didnt type it
@@ -125,7 +129,8 @@ public class MainClass extends JFrame
 			
 		});
 
-		chatLog = new JTextArea(8, 20);
+		chatLog = new JTextPane();
+		chatDoc = chatLog.getStyledDocument();
 		
         chatLog.setFont(font);
 		scrollypolly = new JScrollPane(chatLog);
@@ -191,7 +196,12 @@ public class MainClass extends JFrame
 	 */
 	public void addToChatLog(String stuff)
 	{
-		chatLog.append(stuff + newLine);
+		// TODO Auto-generated catch block
+		try {
+			chatDoc.insertString(chatDoc.getLength(), stuff + newLine, chatDoc.getStyle("regular"));
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
 		chatLog.setCaretPosition(chatLog.getDocument().getLength());
 	}
 	
@@ -201,7 +211,12 @@ public class MainClass extends JFrame
 	 */
 	public void addToChatLogsl(String stuff)
 	{
-		chatLog.append(stuff);
+		// TODO Auto-generated catch block
+		try {
+			chatDoc.insertString(chatDoc.getLength(), stuff, chatDoc.getStyle("regular"));
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
 		chatLog.setCaretPosition(chatLog.getDocument().getLength());
 	}
 	/**
@@ -218,7 +233,6 @@ public class MainClass extends JFrame
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			theInput = this.checkForInput();
@@ -251,7 +265,6 @@ public class MainClass extends JFrame
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			theInput = this.checkForInput();
@@ -341,19 +354,44 @@ public class MainClass extends JFrame
 	 */
 	public void addToChatLog(String stuff, String special, boolean bothSides)
 	{
+		//TODO
 		if(bothSides)
 		{
-			chatLog.append(special + stuff  + special + newLine);
-			chatLog.setCaretPosition(chatLog.getDocument().getLength());
+			try {
+				chatDoc.insertString(chatDoc.getLength(), special + stuff  + special + newLine, chatDoc.getStyle("regular"));
+			} catch (BadLocationException e) {
+				e.printStackTrace();
+			}
 		}
 		else
 		{
-			chatLog.append(special + stuff + newLine);
-			chatLog.setCaretPosition(chatLog.getDocument().getLength());
+			try {
+				chatDoc.insertString(chatDoc.getLength(), special + stuff + newLine, chatDoc.getStyle("regular"));
+			} catch (BadLocationException e) {
+				e.printStackTrace();
+			}
 		}
-		
+		chatLog.setCaretPosition(chatLog.getDocument().getLength());
 	}
-	
+	/**
+	 * This will print out a string to the console, and that string
+	 * will have the style given.
+	 * The styles are: regular, italic, bold, small, large
+	 * @param stuff the string to be printed
+	 * @param style the style of the text to print
+	 */
+	public void addToChatLog(String stuff, String style)
+	{	
+		try {
+			chatDoc.insertString(chatDoc.getLength(), stuff + newLine, chatDoc.getStyle(style));
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
+		chatLog.setCaretPosition(chatLog.getDocument().getLength());
+	}
+	/**
+	 * This will clear all text in the chatlof
+	 */
 	public void clearChatLog()
 	{
 		//This wll clear the screen of text
@@ -364,5 +402,10 @@ public class MainClass extends JFrame
 	public static void main(String args[])
 	{
 		MainClass test = new MainClass();
+		test.addToChatLog("TEST", "italic");
+		test.addToChatLog("TEST", "bold");
+		test.addToChatLog("TEST", "large");
+		test.addToChatLog("TEST", "small");
+		test.addToChatLog("TEST", "regular");
 	}
 }
