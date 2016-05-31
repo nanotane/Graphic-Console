@@ -41,6 +41,8 @@ public class ProcessCommands implements Runnable {
 		//This runs when it is first started
 		theClass.addToChatLog("Welcome to the program!");
 		theClass.addToChatLog("Type /help if you want a list of commands,");
+		theClass.addToChatLog("Type /syshelp for system commands");
+		theClass.addToChatLog("Type /clear to clear the text");
 		theClass.addToChatLog("Type in information into the grey space and then click Enter");
 		theClass.addToChatLog("or hit the enter key on your keyboard");
 		//Lets continualy check if the user typed in a help command
@@ -59,9 +61,21 @@ public class ProcessCommands implements Runnable {
 				theClass.addToChatLog("please consult the appropriate class files");
 				theClass.addToChatLog("--------------------------------");
 			}
+			else if(theInput.contains("/syshelp"))
+			{
+				theClass.addToChatLog("/setcolor", "~", false);
+				theClass.addToChatLog("set the background and forground color", "~", false);
+				theClass.addToChatLog("/setfont", "~", false);
+				theClass.addToChatLog("set the font of the text", "~", false);
+				theClass.addToChatLog("/info", "~", false);
+				theClass.addToChatLog("see the inforamation about the current build", "~", false);
+			}
+			else if(theInput.contains("/clear"))//clear the chatlog
+			{
+				theClass.clearChatLog();
+			}
 			else if(theInput.contains("/help"))//run through the programs list and print out authors, commands, etc.
 			{
-
 				for(int i = 0; i < programList.size(); i++)
 				{
 					theClass.addToChatLogsl("Program name: " + programList.get(i).name);//display the name

@@ -354,6 +354,11 @@ public class MainClass extends JFrame
 		
 	}
 	
+	public void clearChatLog()
+	{
+		//This wll clear the screen of text
+		chatLog.setText("");
+	}
 	
 	//Main method
 	public static void main(String args[])
