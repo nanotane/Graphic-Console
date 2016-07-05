@@ -13,6 +13,8 @@ public class ProcessCommands implements Runnable {
 	private ArrayList<Plugin> programList = new ArrayList<Plugin>();
 	private PluginLoader loader = new PluginLoader();
 	private ReadWrite fileRW;
+	private PluginThread pluginThread;
+	private Thread tempThread;
 	/**
 	 * Creates command objects and puts them into an array list
 	 * @param a the MainClass object that this is pointing to
@@ -36,7 +38,9 @@ public class ProcessCommands implements Runnable {
 		{
 			if(programList.get(i).runAtStart)
 			{
-				programList.get(i).run();
+				pluginThread = new PluginThread(programList.get(i));
+				tempThread = new Thread(pluginThread);
+				tempThread.start();
 				break;//we will run only one program at start
 			}
 		}
@@ -106,15 +110,18 @@ public class ProcessCommands implements Runnable {
 				fileRW.writeAll("test.txt", toWrite);
 				fileRW.read("test.txt");
 			}
-			else //if it was not a built in function then lets go through the programs list 
+			else//if it was not a built in function then lets go through the programs list 
 			{
 				for(int i = 0; i < programList.size(); i++)
 				{
 					if(theInput.equals(programList.get(i).command))//if the program is equal to one of the programs...
 					{
 						theClass.addToChatLog("-------------------------------");
-						programList.get(i).run();//lets run the program
+						pluginThread = new PluginThread(programList.get(i));//lets run the program
+						tempThread = new Thread(pluginThread);
+						tempThread.start();
 						theClass.addToChatLog("-------------------------------");
+						break;
 					}
 				}
 			}

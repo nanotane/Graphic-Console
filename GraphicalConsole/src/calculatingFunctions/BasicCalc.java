@@ -62,29 +62,19 @@ public class BasicCalc extends Plugin
 					//get the operator index
 					indexOp = theInput.indexOf(operators[i]);
 					//get the string up to the op index then turn to a number
-					try
-					{
+//					try
+//					{
 						firstNum = Double.valueOf(theInput.substring(0,indexOp));
 						//get the string from opindex+1 to the end of the string
-						try
-						{
-							secondNum = Double.valueOf(theInput.substring(indexOp+1, theInput.length()));
-							opToPerform = i;//we set what operation we are doing in the second one to because we have passed all checks
-						}
-						catch(NumberFormatException e)
-						{
-							theClass.addToChatLog("Illegal characters in second number");
-							opToPerform = -1;
-						}
-					}
-					catch(NumberFormatException e)
-					{
-						theClass.addToChatLog("Illegal characters in first number");
-						
-					}
-					
-					
-					
+						secondNum = Double.valueOf(theInput.substring(indexOp+1, theInput.length()));
+						opToPerform = i;//we set what operation we are doing in the second one to because we have passed all checks
+//					}
+//					catch(NumberFormatException e)
+//					{
+//						theClass.addToChatLog("Illegal characters in first number");
+//						
+//					}
+
 					i = 5;//now lets exit
 				}
 				
