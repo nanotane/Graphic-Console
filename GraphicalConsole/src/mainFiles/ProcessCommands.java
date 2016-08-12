@@ -23,6 +23,7 @@ public class ProcessCommands implements Runnable {
 		//this will load all of the programs and return them in the programlist
 		programList = loader.createAll(theClass);
 		fileRW = new ReadWrite(a);
+		
 	}
 
 
