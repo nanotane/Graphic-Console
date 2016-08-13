@@ -46,6 +46,7 @@ public class RogueTraderStats extends Plugin{
 		//						
 		//				}
 		//Loop for navigating through entries
+		mainLoop:
 		while(true)
 		{
 			for(int i = 0; i < pointer.sub.size(); i++)//for @ entries
@@ -62,10 +63,15 @@ public class RogueTraderStats extends Plugin{
 					pointer =  rtfoStack.pop();//then lets pop the stack and set the pointer to what we popped
 				}
 			}
+			else if(input.equalsIgnoreCase("q"))
+			{
+				break mainLoop;
+			}
 			else if(Integer.parseInt(input) > pointer.sub.size() || Integer.parseInt(input) < 0 || input == null)
 			{
 				theClass.addToChatLog("out of bounds or null");
 			}
+			
 			else//if not then lets see what they wanted
 			{
 				boolean topwLoop = true;//flag for if we found something
@@ -88,6 +94,7 @@ public class RogueTraderStats extends Plugin{
 				}
 			}
 		}
+		theClass.addToChatLog("Exiting rogue trader program", "~~", true);
 	}
 	/**
 	 * THis will read the rogue trader file and create the file system

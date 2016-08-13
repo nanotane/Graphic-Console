@@ -32,7 +32,7 @@ public class MainClass extends JFrame
 	public String version = "0.6.1";
 	private static final long serialVersionUID = 89L;
 	protected final int MAX_X = 620;
-	protected final int MAX_Y = 400;
+	protected final int MAX_Y = 800;
 	private final String newLine = "\n";
 	protected JPanel lowerPanel;//used to contain the buttons for the lower section
 	protected JTextField messageInput;
@@ -44,7 +44,7 @@ public class MainClass extends JFrame
 	
 	//This is a special string that indicates that we do not have new input
 	protected String noInputString = "#$%NO%$#";//This is a weird sequence of characters so that way we know a user didnt type it
-	protected Color forgroundColor = new Color(255, 247, 74);
+	protected Color forgroundColor = new Color(91, 255, 45);
 	//past colors: 73, 228, 241, a shade of cyna
 	protected Font font = new Font("Verdana", Font.PLAIN, 12);//setting the font size and style
 	protected Color backgroundColor = Color.black;
