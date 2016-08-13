@@ -1,0 +1,98 @@
+@Skills
+#Ballistic trained
++15 (60)
+#Willpower intermediate
++10
+#Fellowship intermediate
++10
+#intelligence basic
++5
+#Awerness
+Can perceve slight changes in environemt, like air, vibration, noise etc.
+Can percive ambushes traps and hidden objects
+#Command
+Can command others to do stuff. Can have rolls where we see
+if others will follow complex orders, may not follow them well, 
+on time, or at all. Half action for simple commands, full for 
+complex ones. (Fellowship)
+#Commerece
+For negotiiating prices, goes against comerce skill of others.
+Needed for building financial networks. (Intel)
+Making deals, and seeing through bad trades, (Fellowship)
+#Common Lore (Imperium)
+Know most stuff about the imperium world. Any common knowledge stuff
+#Ciphers
+Can understand the secret codes of others, no roll needed. 
+Unless its old (Intelegence)
+#Common Lore (Rogue Traders)
+Know the rouge traders basics, other traders, their history, power etc.
+#Dodge
+Can dodge ranged and close ranged attacks
+#Evaluate 
+Can better determine value of objects. Reveals item availability/price. 
+If failed roll think the price is lower. (Intellegence)
+#Literacy
+Can read and write any language he speaks
+#Scholastic lore (Astromancy)
+Knows the complex subject of astronomy.
+#Speak Language (High Gothic, Low Gothic)
+#Secret Tounge
+#Pilot(space and flyer)
+Can fly anthing really. 
+#Concealment
+Can be used to hide from things. If still, gets +10 to roll.
+(Agility)
+;
+@Talents
+#Air of authority
+Can command others easily, and can command up to 10
+other NPCs. When commanding randos must roll a die to see
+how many will follow me. 
+#Melee weapon training (Universal)
+Can use hand to hand weapons
+#Pistol Weapon Training (Universal)
+Can use all pistol weapons easily. 
+#Quick Draw
+Can ready any one handed weapon (pistol or sword) instantly
+#Technical Knock
+Can clear stoppages in any weapon in half an action.
+Can use one weapon per round
+#Weapon training talent: Laspistols
+Can use las pistols
+#Exotic(shuriken catapult)
+Can use the eldar rifles
+;
+@Money
+#29.7
+;
+@Extra items
+#Heraldry book
+#Carapace armor
+6 ap 15 kg
+everything else
+#guardsman armor
+4ap
+head and chest
+#2 tau pistols
+30m, S/2/-, 2d10 + 2 Energy, Pen 4, None 
+#metal gun mars
+20m
+2d10+8
+13 pen
+5 clip
+#recoil greaves
+can fire basic weapon one handed without -20 penalty
+#Power sword
+1d10+5 
+power field
+balanced
+#stub revolver
+30m
+1d10+3 
+reliable
+6 rounds
+;
+@XP
+# raw: 300
+#lvl 2
+;

@@ -1,15 +1,17 @@
 package mainFiles;
 
+import gameFunctions.RogueTraderStats;
+import gameFunctions.id2013.TarotCardDealer;
+import gameFunctions.id2013.TicTacToeGame;
+import gameFunctions.id2013.Blindman.Main2;
+
 import java.util.ArrayList;
 
+import utilityFunctions.DiceCalc;
 import calculatingFunctions.BasicCalc;
 import calculatingFunctions.ResistorCalc;
 import calculatingFunctions.SimpleConverter;
 import calculatingFunctions.StringBinaryConverter;
-import gameFunctions.id2013.TarotCardDealer;
-import gameFunctions.id2013.TicTacToeGame;
-import gameFunctions.id2013.Blindman.Main2;
-import utilityFunctions.DiceCalc;
 
 public class PluginLoader {
 	
@@ -29,6 +31,7 @@ public class PluginLoader {
 		programList.add(new TarotCardDealer(theClass));
 		programList.add(new TicTacToeGame(theClass));
 		programList.add(new Main2(theClass)); //this is the blind man game
+		programList.add(new RogueTraderStats(theClass));
 		return programList;
 	}
 }
