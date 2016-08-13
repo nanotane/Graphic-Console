@@ -38,19 +38,6 @@ public class RogueTraderStats extends Plugin{
 		RTFO pointer = root;
 		root = readRTFile(root);
 		//		now for navigating through it
-		//				for(int i = 0; i < rtfoList.size(); i++)//for @ entries
-		//				{
-		//					theClass.addToChatLog(rtfoList.get(i).contents);
-		//					for(int j = 0; j < rtfoList.get(i).sub.size(); j++)//for # entries
-		//					{
-		//						theClass.addToChatLog(rtfoList.get(i).sub.get(j).contents);
-		//						for(int k = 0; k < rtfoList.get(i).sub.get(j).sub.size(); k++) //for normal entries
-		//						{
-		//							theClass.addToChatLog(rtfoList.get(i).sub.get(j).sub.get(k).contents);
-		//						}
-		//					}
-		//						
-		//				}
 		//Loop for navigating through entries
 		mainLoop:
 		while(true)
@@ -178,9 +165,19 @@ public class RogueTraderStats extends Plugin{
 		{	
 			for(String sym: symbols)//if so go through the symbols list...
 			{
-				if(root.sub.get(0).contents.contains(sym))//see if one of the children contains a symbol
+				if(root.sub.get(0).contents == null)
 				{
-					newSym = sym;
+					if(root.sub.get(1).contents.contains(sym))//see if one of the children contains a symbol
+					{
+						newSym = sym;
+					}
+				}
+				else
+				{
+					if(root.sub.get(0).contents.contains(sym))//see if one of the children contains a symbol
+					{
+						newSym = sym;
+					}
 				}
 			}
 		}
