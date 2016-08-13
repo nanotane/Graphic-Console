@@ -63,9 +63,25 @@ public class RogueTraderStats extends Plugin{
 					pointer =  rtfoStack.pop();//then lets pop the stack and set the pointer to what we popped
 				}
 			}
-			else if(input.equalsIgnoreCase("q"))
+			else if(input.equalsIgnoreCase("q"))//if we are quiting
 			{
 				break mainLoop;
+			}
+			else if(input.contains("e"))//if we are editing
+			{
+				String number = "";
+				number = input.substring(input.length()-1, input.length());//grab last of string which should be the number
+				for(int i = 0; i < pointer.sub.size(); i++)
+				{
+					if(number.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
+					{
+						editRTFO(pointer.sub.get(i));
+					}
+				}
+			}
+			else if(input.equalsIgnoreCase("n"))
+			{
+				pointer = createRTFO(pointer);
 			}
 			else if(Integer.parseInt(input) > pointer.sub.size() || Integer.parseInt(input) < 0 || input == null)
 			{
@@ -96,6 +112,31 @@ public class RogueTraderStats extends Plugin{
 		}
 		theClass.addToChatLog("Exiting rogue trader program", "~~", true);
 	}
+	/**
+	 * This will edit the contents of an RTFO file
+	 * @param toEdit
+	 */
+	public void editRTFO(RTFO toEdit)
+	{
+		theClass.addToChatLog("Type in new info and hit enter", "~", true);
+		String input = theClass.waitForInput();
+		toEdit.contents = input;
+	}
+	/**
+	 * This will create a new RTFO
+	 * @param root
+	 * @return root
+	 */
+	public RTFO createRTFO(RTFO root)
+	{
+		theClass.addToChatLog("Type in the name of the folder", "~", true);
+		String input = theClass.waitForInput();
+		RTFO newRTFO = new RTFO();
+		newRTFO.contents = input;
+		root.sub.add(newRTFO);
+		return root;
+	}
+	
 	/**
 	 * THis will read the rogue trader file and create the file system
 	 */
@@ -164,6 +205,7 @@ public class RogueTraderStats extends Plugin{
 		}
 		return root;
 	}
+	
 	@Override
 	public void run()
 	{
