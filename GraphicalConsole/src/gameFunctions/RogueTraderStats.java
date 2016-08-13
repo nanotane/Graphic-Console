@@ -131,8 +131,15 @@ public class RogueTraderStats extends Plugin{
 	{
 		theClass.addToChatLog("Type in new info and hit enter", "~", true);
 		String input = theClass.waitForInput();
-		String symbol = toEdit.contents.substring(0, 1);
-		toEdit.contents = symbol+ input;
+		String symbolTemp = toEdit.contents.substring(0, 1);
+		for(String sym: symbols)
+		{
+			if(symbolTemp.equalsIgnoreCase(sym))
+			{
+				input = input + symbolTemp;
+			}
+		}
+		toEdit.contents = input;
 	}
 	/**
 	 * This will create a new RTFO

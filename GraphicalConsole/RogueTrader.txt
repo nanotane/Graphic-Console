@@ -38,7 +38,7 @@ Knows the complex subject of astronomy.
 #Speak Language (High Gothic, Low Gothic)
 #Secret Tounge
 #Pilot(space and flyer)
-Can fly anthing really.
+Can fly space vehicles and atm vehicles
 #Concealment
 Can be used to hide from things. If still, gets +10 to roll.
 (Agility)
