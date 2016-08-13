@@ -1,9 +1,13 @@
 package gameFunctions;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -16,6 +20,8 @@ public class RogueTraderStats extends Plugin{
 	public RTFO current;
 	public RTFO topOfList;
 	public Stack<RTFO> rtfoStack = new Stack();
+	public String fileName = "RogueTrader.txt";
+	public String[] symbols = {"@", "#"};
 	public RogueTraderStats(MainClass a) {
 		super(a);
 		this.name = "Basic Calculator";
@@ -83,6 +89,11 @@ public class RogueTraderStats extends Plugin{
 			{
 				pointer = createRTFO(pointer);
 			}
+			else if(input.equalsIgnoreCase("s"))
+			{
+				theClass.addToChatLog("Saved", "~", true);
+				saveRTFO(root);
+			}
 			else if(Integer.parseInt(input) > pointer.sub.size() || Integer.parseInt(input) < 0 || input == null)
 			{
 				theClass.addToChatLog("out of bounds or null");
@@ -120,7 +131,8 @@ public class RogueTraderStats extends Plugin{
 	{
 		theClass.addToChatLog("Type in new info and hit enter", "~", true);
 		String input = theClass.waitForInput();
-		toEdit.contents = input;
+		String symbol = toEdit.contents.substring(0, 1);
+		toEdit.contents = symbol+ input;
 	}
 	/**
 	 * This will create a new RTFO
@@ -131,12 +143,78 @@ public class RogueTraderStats extends Plugin{
 	{
 		theClass.addToChatLog("Type in the name of the folder", "~", true);
 		String input = theClass.waitForInput();
+		String newSym = "";
 		RTFO newRTFO = new RTFO();
-		newRTFO.contents = input;
+		//for making a new @
+		if(!root.sub.isEmpty())//are there children?
+		{	
+			for(String sym: symbols)//if so go through the symbols list...
+			{
+				if(root.sub.get(0).contents.contains(sym))//see if one of the children contains a symbol
+				{
+					newSym = sym;
+				}
+			}
+		}
+		//for making a new #
+		if(root.contents != null)
+		{
+			if(root.contents.contains("@"))
+			{
+				newSym = "#";
+			}
+		}
+		newRTFO.contents = newSym + input;
 		root.sub.add(newRTFO);
 		return root;
 	}
-	
+	/**
+	 * This will save all RTFO contents into the current text file
+	 */
+	public void saveRTFO(RTFO root)
+	{
+		FileWriter fw;
+		RTFO pointer = root;
+		try {
+			fw = new FileWriter(fileName);
+			PrintWriter pw = new PrintWriter(fw, true);
+			traverse(pointer, fw, pw);
+			fw.close();
+			pw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+	/**
+	 * This will traverse the elements of the tree and print them to the file
+	 * @param pointer 
+	 * @param fw
+	 * @param pw
+	 */
+	public void traverse(RTFO pointer, FileWriter fw, PrintWriter pw)
+	{
+		if(!pointer.sub.isEmpty())
+		{
+			for(int i = 0; i < pointer.sub.size(); i++)
+			{
+				if(pointer.sub.get(i).contents != null)
+				{
+					pw.println(pointer.sub.get(i).contents);
+				}
+				traverse(pointer.sub.get(i), fw, pw);
+				
+				if(pointer.contents == null)
+				{
+					pw.println(";");
+				}
+			}
+		}
+		else
+		{
+			return;
+		}
+	}
 	/**
 	 * THis will read the rogue trader file and create the file system
 	 */
@@ -147,7 +225,7 @@ public class RogueTraderStats extends Plugin{
 		try {
 			// FileReader reads text files in the default encoding.
 			FileReader fileReader = 
-					new FileReader("RogueTrader.txt");
+					new FileReader(fileName);
 
 			// Always wrap FileReader in BufferedReader.
 			BufferedReader bufferedReader = 
@@ -162,7 +240,7 @@ public class RogueTraderStats extends Plugin{
 				if(line.contains("@"))
 				{
 					String tempS = line;
-					tempS = line.substring(1, line.length());//remove at
+					//tempS = line.substring(1, line.length());//remove at
 					tempS.trim();//remove leading and ending spaces
 					topRTFO.contents = tempS;
 					root.sub.add(topRTFO);
@@ -172,7 +250,7 @@ public class RogueTraderStats extends Plugin{
 					String tempS = line;
 					topRTFO.sub.add(subRTFO);
 					subRTFO = new RTFO();
-					tempS = line.substring(1, line.length());//remove at
+					//tempS = line.substring(1, line.length());//remove at
 					tempS.trim();//remove leading and ending spaces
 					subRTFO.contents = line;
 					//					topRTFO.sub.add(subRTFO);

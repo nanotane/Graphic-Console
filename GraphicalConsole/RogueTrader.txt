@@ -12,8 +12,8 @@ Can perceve slight changes in environemt, like air, vibration, noise etc.
 Can percive ambushes traps and hidden objects
 #Command
 Can command others to do stuff. Can have rolls where we see
-if others will follow complex orders, may not follow them well, 
-on time, or at all. Half action for simple commands, full for 
+if others will follow complex orders, may not follow them well,
+on time, or at all. Half action for simple commands, full for
 complex ones. (Fellowship)
 #Commerece
 For negotiiating prices, goes against comerce skill of others.
@@ -22,14 +22,14 @@ Making deals, and seeing through bad trades, (Fellowship)
 #Common Lore (Imperium)
 Know most stuff about the imperium world. Any common knowledge stuff
 #Ciphers
-Can understand the secret codes of others, no roll needed. 
+Can understand the secret codes of others, no roll needed.
 Unless its old (Intelegence)
 #Common Lore (Rogue Traders)
 Know the rouge traders basics, other traders, their history, power etc.
 #Dodge
 Can dodge ranged and close ranged attacks
 #Evaluate 
-Can better determine value of objects. Reveals item availability/price. 
+Can better determine value of objects. Reveals item availability/price.
 If failed roll think the price is lower. (Intellegence)
 #Literacy
 Can read and write any language he speaks
@@ -38,7 +38,7 @@ Knows the complex subject of astronomy.
 #Speak Language (High Gothic, Low Gothic)
 #Secret Tounge
 #Pilot(space and flyer)
-Can fly anthing really. 
+Can fly anthing really.
 #Concealment
 Can be used to hide from things. If still, gets +10 to roll.
 (Agility)
@@ -47,11 +47,11 @@ Can be used to hide from things. If still, gets +10 to roll.
 #Air of authority
 Can command others easily, and can command up to 10
 other NPCs. When commanding randos must roll a die to see
-how many will follow me. 
+how many will follow me.
 #Melee weapon training (Universal)
 Can use hand to hand weapons
 #Pistol Weapon Training (Universal)
-Can use all pistol weapons easily. 
+Can use all pistol weapons easily.
 #Quick Draw
 Can ready any one handed weapon (pistol or sword) instantly
 #Technical Knock
@@ -74,7 +74,7 @@ everything else
 4ap
 head and chest
 #2 tau pistols
-30m, S/2/-, 2d10 + 2 Energy, Pen 4, None 
+30m, S/2/-, 2d10 + 2 Energy, Pen 4, None
 #metal gun mars
 20m
 2d10+8
@@ -83,16 +83,42 @@ head and chest
 #recoil greaves
 can fire basic weapon one handed without -20 penalty
 #Power sword
-1d10+5 
+1d10+5
 power field
 balanced
 #stub revolver
 30m
-1d10+3 
+1d10+3
 reliable
 6 rounds
 ;
 @XP
 # raw: 300
 #lvl 2
+;
+@Trophy room
+#Skull of person we killed (physcher)
+;
+@Vehicles
+#12 arvus lighter drop ships
+#2 chimeras with twin bolters
+#1 valkery with heavy bolters and fuel drop pods
+#1 lemun russ
+;
+@Vehicles I want
+#Valkyrie for drop ship and support
+#Taurox for light transport
+#Tarous
+#Chimera with twin linked bolters and a bolter armament
+#Possible Hydra
+;
+@crew
+#Gunner officer Exodia
+35 balistic
+20 everything else
+Cybernetic Senses
+;
+@test
+#special
+this is information
 ;
