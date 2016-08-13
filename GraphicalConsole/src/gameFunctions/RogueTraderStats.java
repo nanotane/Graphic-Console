@@ -94,6 +94,18 @@ public class RogueTraderStats extends Plugin{
 				theClass.addToChatLog("Saved", "~", true);
 				saveRTFO(root);
 			}
+			else if(input.contains("d"))
+			{
+				String number = "";
+				number = input.substring(input.length()-1, input.length());//grab last of string which should be the number
+				for(int i = 0; i < pointer.sub.size(); i++)
+				{
+					if(number.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
+					{
+						deleteRTFO(pointer, i);
+					}
+				}
+			}
 			else if(Integer.parseInt(input) > pointer.sub.size() || Integer.parseInt(input) < 0 || input == null)
 			{
 				theClass.addToChatLog("out of bounds or null");
@@ -124,7 +136,7 @@ public class RogueTraderStats extends Plugin{
 		theClass.addToChatLog("Exiting rogue trader program", "~~", true);
 	}
 	/**
-	 * This will edit the contents of an RTFO file
+	 * This will edit the contents of an RTFO 
 	 * @param toEdit
 	 */
 	public void editRTFO(RTFO toEdit)
@@ -140,6 +152,15 @@ public class RogueTraderStats extends Plugin{
 			}
 		}
 		toEdit.contents = input;
+	}
+	/**
+	 * This will delete an RTFO
+	 * @param toDelete RTFO to be deleted
+	 */
+	public void deleteRTFO(RTFO root, int toDelete)
+	{
+		root.sub.remove(toDelete);
+		theClass.addToChatLog("RTFO deleted", "~", true);
 	}
 	/**
 	 * This will create a new RTFO

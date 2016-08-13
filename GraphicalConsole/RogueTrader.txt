@@ -118,7 +118,3 @@ reliable
 20 everything else
 Cybernetic Senses
 ;
-@test
-#special
-this is information
-;
