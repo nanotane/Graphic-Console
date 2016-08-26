@@ -111,7 +111,7 @@ public class RogueTraderStats extends Plugin{
 							{
 								RTFO temp = pointer;
 								rtfoStack.push(temp);
-								theClass.addToChatLog(i + " " + pointer.sub.get(i).contents);
+								theClass.addToChatLog(i + " " + pointer.sub.get(i).contents, "--", true);
 								pointer = pointer.sub.get(i);
 								topwLoop = false;
 								break topfLoop;
