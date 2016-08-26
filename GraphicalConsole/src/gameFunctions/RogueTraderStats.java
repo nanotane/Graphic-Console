@@ -47,7 +47,7 @@ public class RogueTraderStats extends Plugin{
 				theClass.addToChatLog(i + " " +pointer.sub.get(i).contents, "*", false);
 			}
 
-			String input = theClass.waitForInput();
+			String input = theClass.waitForInput().replaceAll(" ", "");//we will also remove all spaces
 
 			if(input.equals("b"))//if they want to go back
 			{

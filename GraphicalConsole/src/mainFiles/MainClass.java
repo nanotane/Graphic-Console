@@ -32,7 +32,7 @@ public class MainClass extends JFrame
 	public String version = "0.6.1";
 	private static final long serialVersionUID = 89L;
 	protected final int MAX_X = 620;
-	protected final int MAX_Y = 800;
+	protected final int MAX_Y = 700;
 	private final String newLine = "\n";
 	protected JPanel lowerPanel;//used to contain the buttons for the lower section
 	protected JTextField messageInput;
