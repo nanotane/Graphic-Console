@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 import mainFiles.MainClass;
@@ -40,87 +42,144 @@ public class RogueTraderStats extends Plugin{
 		//		now for navigating through it
 		//Loop for navigating through entries
 		mainLoop:
+			while(true)
+			{
+				for(int i = 0; i < pointer.sub.size(); i++)//for @ entries
+				{
+					theClass.addToChatLog(i + " " +pointer.sub.get(i).contents, "*", false);
+				}
+
+				String input = theClass.waitForInput().replaceAll(" ", "");//we will also remove all spaces
+
+				if(input.equals("b"))//if they want to go back
+				{
+					if(!rtfoStack.isEmpty())//and the stack is not empty
+					{
+						pointer =  rtfoStack.pop();//then lets pop the stack and set the pointer to what we popped
+					}
+				}
+				else if(input.equalsIgnoreCase("q"))//if we are quiting
+				{
+					break mainLoop;
+				}
+				else if(input.contains("e"))//if we are editing
+				{
+					String number = "";
+					number = input.substring(input.length()-1, input.length());//grab last of string which should be the number
+					for(int i = 0; i < pointer.sub.size(); i++)
+					{
+						if(number.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
+						{
+							editRTFO(pointer.sub.get(i));
+						}
+					}
+				}
+				else if(input.equalsIgnoreCase("n"))
+				{
+					pointer = createRTFO(pointer);
+				}
+				else if(input.equalsIgnoreCase("s"))
+				{
+					theClass.addToChatLog("Saved", "~", true);
+					saveRTFO(root);
+				}
+				else if(input.contains("d"))
+				{
+					String number = "";
+					number = input.substring(input.length()-1, input.length());//grab last of string which should be the number
+					for(int i = 0; i < pointer.sub.size(); i++)
+					{
+						if(number.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
+						{
+							deleteRTFO(pointer, i);
+						}
+					}
+				}
+				else if(input.contains("w"))
+				{
+					writeRTFO(pointer);
+				}
+				else if(Integer.parseInt(input) > pointer.sub.size() || Integer.parseInt(input) < 0 || input == null)
+				{
+					theClass.addToChatLog("out of bounds or null");
+				}
+
+				else//if not then lets see what they wanted
+				{
+					boolean topwLoop = true;//flag for if we found something
+					while(topwLoop)
+					{
+						//now choose a section
+						topfLoop:
+							for(int i = 0; i < pointer.sub.size(); i++)
+							{
+								if(input.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
+								{
+									RTFO temp = pointer;
+									rtfoStack.push(temp);
+									theClass.addToChatLog(i + " " + pointer.sub.get(i).contents, "--", true);
+									pointer = pointer.sub.get(i);
+									topwLoop = false;
+									break topfLoop;
+								}
+							}
+					}
+				}
+			}
+		theClass.addToChatLog("Exiting rogue trader program", "~~", true);
+	}
+	/**
+	 * This will allow the user to continue writing after they hit enter, 
+	 * and until they type -qw
+	 * @param root
+	 */
+	public void writeRTFO(RTFO root)
+	{
+		/*
+		 *This will have a stack that saves the string objects that are to be used
+		 *Once the user quits and writes, then we will go through the list and make all of these 
+		 *entries their own RTFO that is a child of the root. 
+		 *
+		 * 0. Check and make sure the root is a #
+		 * 1. check and see if what they typed was to save 
+		 * 2. if not then lets add it to the stack.
+		 * 3. When we are creating the RTFO's we need to first check and make sure the stack isnt empty
+		 * if so then we will do nothing.
+		 * 
+		 */
+		//TODO
+		theClass.addToChatLog("Writing...", "-", false);
+		String input;
+		Queue<String> writingQ = new LinkedList<String>();
+		//lets make sure its a # folder
+		if(!root.contents.contains("#"))
+		{
+			return;
+		}
 		while(true)
 		{
-			for(int i = 0; i < pointer.sub.size(); i++)//for @ entries
+			input = theClass.waitForInput();
+			//now lets check
+			if(input.equalsIgnoreCase("-qw"))
 			{
-				theClass.addToChatLog(i + " " +pointer.sub.get(i).contents, "*", false);
-			}
-
-			String input = theClass.waitForInput().replaceAll(" ", "");//we will also remove all spaces
-
-			if(input.equals("b"))//if they want to go back
-			{
-				if(!rtfoStack.isEmpty())//and the stack is not empty
+				if(writingQ.peek() != null)//check the top
 				{
-					pointer =  rtfoStack.pop();//then lets pop the stack and set the pointer to what we popped
-				}
-			}
-			else if(input.equalsIgnoreCase("q"))//if we are quiting
-			{
-				break mainLoop;
-			}
-			else if(input.contains("e"))//if we are editing
-			{
-				String number = "";
-				number = input.substring(input.length()-1, input.length());//grab last of string which should be the number
-				for(int i = 0; i < pointer.sub.size(); i++)
-				{
-					if(number.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
+					//lets create
+					while(writingQ.peek()!= null)//go through the que
 					{
-						editRTFO(pointer.sub.get(i));
+						RTFO newRTFO = new RTFO();//make temp rtfo
+						newRTFO.contents = writingQ.remove();//lets add the string from the queue
+						root.sub.add(newRTFO);//lets add it to the children
 					}
 				}
+				break;
 			}
-			else if(input.equalsIgnoreCase("n"))
+			else
 			{
-				pointer = createRTFO(pointer);
-			}
-			else if(input.equalsIgnoreCase("s"))
-			{
-				theClass.addToChatLog("Saved", "~", true);
-				saveRTFO(root);
-			}
-			else if(input.contains("d"))
-			{
-				String number = "";
-				number = input.substring(input.length()-1, input.length());//grab last of string which should be the number
-				for(int i = 0; i < pointer.sub.size(); i++)
-				{
-					if(number.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
-					{
-						deleteRTFO(pointer, i);
-					}
-				}
-			}
-			else if(Integer.parseInt(input) > pointer.sub.size() || Integer.parseInt(input) < 0 || input == null)
-			{
-				theClass.addToChatLog("out of bounds or null");
-			}
-			
-			else//if not then lets see what they wanted
-			{
-				boolean topwLoop = true;//flag for if we found something
-				while(topwLoop)
-				{
-					//now choose a section
-					topfLoop:
-						for(int i = 0; i < pointer.sub.size(); i++)
-						{
-							if(input.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
-							{
-								RTFO temp = pointer;
-								rtfoStack.push(temp);
-								theClass.addToChatLog(i + " " + pointer.sub.get(i).contents, "--", true);
-								pointer = pointer.sub.get(i);
-								topwLoop = false;
-								break topfLoop;
-							}
-						}
-				}
+				writingQ.add(input);
 			}
 		}
-		theClass.addToChatLog("Exiting rogue trader program", "~~", true);
+
 	}
 	/**
 	 * This will edit the contents of an RTFO 
@@ -207,10 +266,9 @@ public class RogueTraderStats extends Plugin{
 			fw.close();
 			pw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
+	}
 	/**
 	 * This will traverse the elements of the tree and print them to the file
 	 * @param pointer 
@@ -228,7 +286,7 @@ public class RogueTraderStats extends Plugin{
 					pw.println(pointer.sub.get(i).contents);
 				}
 				traverse(pointer.sub.get(i), fw, pw);
-				
+
 				if(pointer.contents == null)
 				{
 					pw.println(";");
@@ -302,13 +360,12 @@ public class RogueTraderStats extends Plugin{
 					"Unable to open file '" + 
 							"file" + "'");                
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			theClass.addToChatLog("IO Exception ocurred");
 			e.printStackTrace();
 		}
 		return root;
 	}
-	
+
 	@Override
 	public void run()
 	{
