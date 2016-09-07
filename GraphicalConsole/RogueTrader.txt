@@ -22,7 +22,7 @@ Making deals, and seeing through bad trades, (Fellowship)
 #Common Lore (Imperium)
 Know most stuff about the imperium world. Any common knowledge stuff
 #Ciphers
-Can understand the secret codes of others, no roll needed.
+Can understand the secret codes of other rogue traders.
 Unless its old (Intelegence)
 #Common Lore (Rogue Traders)
 Know the rouge traders basics, other traders, their history, power etc.
@@ -38,12 +38,13 @@ Knows the complex subject of astronomy.
 #Speak Language (High Gothic, Low Gothic)
 #Secret Tounge
 #Pilot(space and flyer)
-Can fly space vehicles and atm vehicles
+Can fly anthing really.
 #Concealment
 Can be used to hide from things. If still, gets +10 to roll.
 (Agility)
+#weapon skill trained
 ;
-@Talents
+@Talents:
 #Air of authority
 Can command others easily, and can command up to 10
 other NPCs. When commanding randos must roll a die to see
@@ -63,7 +64,7 @@ Can use las pistols
 Can use the eldar rifles
 ;
 @Money
-#29.7
+#raw: 35.7
 ;
 @Extra items
 #Heraldry book
@@ -91,16 +92,19 @@ balanced
 1d10+3
 reliable
 6 rounds
+infared goggles#
+allows you to see in low level light conditions
 ;
 @XP
-# raw: 300
+raw: 450#
 #lvl 2
 ;
 @Trophy room
 #Skull of person we killed (physcher)
+#the teleport pack of a mech boy we killed and his shield generator
 ;
 @Vehicles
-#12 arvus lighter drop ships
+9 arvus lighter drop ships#
 #2 chimeras with twin bolters
 #1 valkery with heavy bolters and fuel drop pods
 #1 lemun russ
@@ -112,14 +116,45 @@ reliable
 #Chimera with twin linked bolters and a bolter armament
 #Possible Hydra
 ;
-@crew
+@dank crew
 #Gunner officer Exodia
 35 balistic
 20 everything else
-Cybernetic Senses
-this
-is
-a
-test of the abilities
-of this function
+Cybernetic senses
+#combat personal
+about 950
+;
+@quest info
+#special
+#Find stuff
+need to find stuff for this guy
+may get about 10 profit factor
+need to find:
+Squig
+rare wine
+#xeno hunter
+find xenos and get money for kills
+bring back harder ones for more money
+simple-1 pf
+moderate 2 pf
+high 3 pf
+#casino heist
+break into vault
+could be anything
+all entertainers have same outfit
+every hour go into chip room
+druge dealers on casino floor
+staff in dreamy high state
+cash 1090
+niles by craps, wears black and purple and has drugs
+1. wheres the vault
+where are secret passage ways
+stuff
+;
+@characters
+#port wander
+;
+@notes
+#notes
+this is for notes
 ;
