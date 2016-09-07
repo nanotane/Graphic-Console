@@ -26,7 +26,7 @@ public class RogueTraderStats extends Plugin{
 	public String[] symbols = {"@", "#"};
 	public RogueTraderStats(MainClass a) {
 		super(a);
-		this.name = "Basic Calculator";
+		this.name = "Rogue trader program";
 		this.command = "/rtf";
 		this.author = "Ian Davila";
 		this.description = "Rogue trader file system";
@@ -99,7 +99,7 @@ public class RogueTraderStats extends Plugin{
 				{
 					writeRTFO(pointer);
 				}
-				else if(Integer.parseInt(input) > pointer.sub.size() || Integer.parseInt(input) < 0 || input == null)
+				else if(input == null || input.equals("") || Integer.parseInt(input) > pointer.sub.size() || Integer.parseInt(input) < 0)
 				{
 					theClass.addToChatLog("out of bounds or null");
 				}
@@ -323,7 +323,6 @@ public class RogueTraderStats extends Plugin{
 				if(line.contains("@"))
 				{
 					String tempS = line;
-					//tempS = line.substring(1, line.length());//remove at
 					tempS.trim();//remove leading and ending spaces
 					topRTFO.contents = tempS;
 					root.sub.add(topRTFO);
@@ -333,14 +332,15 @@ public class RogueTraderStats extends Plugin{
 					String tempS = line;
 					topRTFO.sub.add(subRTFO);
 					subRTFO = new RTFO();
-					//tempS = line.substring(1, line.length());//remove at
 					tempS.trim();//remove leading and ending spaces
 					subRTFO.contents = line;
-					//					topRTFO.sub.add(subRTFO);
 				}
 				else if(line.contains(";"))
 				{
-					topRTFO.sub.add(subRTFO);
+					if(subRTFO.contents != null)
+					{
+						topRTFO.sub.add(subRTFO);
+					}
 					subRTFO = new RTFO();
 					topRTFO = new RTFO();
 				}
@@ -358,7 +358,10 @@ public class RogueTraderStats extends Plugin{
 		catch(FileNotFoundException ex) {
 			theClass.addToChatLog(
 					"Unable to open file '" + 
-							"file" + "'");                
+							"file" + fileName);    
+			theClass.addToChatLog("Creating basic file....");
+			makeNewFile();
+			readRTFile(root);
 		} catch (IOException e) {
 			theClass.addToChatLog("IO Exception ocurred");
 			e.printStackTrace();
@@ -366,6 +369,29 @@ public class RogueTraderStats extends Plugin{
 		return root;
 	}
 
+	public void makeNewFile()
+	{
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter(fileName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		PrintWriter pw = new PrintWriter(fw, true);
+		pw.println("@folder1");
+		pw.println(";");
+		pw.println("@folder2");
+		pw.println(";");
+		pw.println("@folder3");
+		pw.println(";");
+		try {
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		pw.close();
+	}
+	
 	@Override
 	public void run()
 	{

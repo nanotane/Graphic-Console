@@ -82,7 +82,7 @@ public class ProcessCommands implements Runnable {
 			{
 				for(int i = 0; i < programList.size(); i++)
 				{
-					theClass.addToChatLogsl("Program name: " + programList.get(i).name);//display the name
+					theClass.addToChatLog("Program name: " + programList.get(i).name);//display the name
 					theClass.addToChatLog("Command: " + programList.get(i).command);//display the author
 					theClass.addToChatLog("Author: " + programList.get(i).author);
 					theClass.addToChatLog("Description: " + programList.get(i).description);//displays description
