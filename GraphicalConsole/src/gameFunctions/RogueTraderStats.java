@@ -65,7 +65,7 @@ public class RogueTraderStats extends Plugin{
 				else if(input.contains("e"))//if we are editing
 				{
 					String number = "";
-					number = input.substring(input.length()-1, input.length());//grab last of string which should be the number
+					number = input.substring(1, input.length());//grab last of string which should be the number
 					for(int i = 0; i < pointer.sub.size(); i++)
 					{
 						if(number.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
@@ -86,7 +86,7 @@ public class RogueTraderStats extends Plugin{
 				else if(input.contains("d"))
 				{
 					String number = "";
-					number = input.substring(input.length()-1, input.length());//grab last of string which should be the number
+					number = input.substring(1, input.length());//grab last of string which should be the number
 					for(int i = 0; i < pointer.sub.size(); i++)
 					{
 						if(number.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
