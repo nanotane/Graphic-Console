@@ -147,7 +147,6 @@ public class RogueTraderStats extends Plugin{
 		 * if so then we will do nothing.
 		 * 
 		 */
-		//TODO
 		theClass.addToChatLog("Writing...", "-", false);
 		String input;
 		Queue<String> writingQ = new LinkedList<String>();
@@ -330,7 +329,11 @@ public class RogueTraderStats extends Plugin{
 				else if(line.contains("#"))//this is a sub section
 				{
 					String tempS = line;
-					topRTFO.sub.add(subRTFO);
+					if(subRTFO.contents != null)
+					{
+						topRTFO.sub.add(subRTFO);
+					}
+					
 					subRTFO = new RTFO();
 					tempS.trim();//remove leading and ending spaces
 					subRTFO.contents = line;
