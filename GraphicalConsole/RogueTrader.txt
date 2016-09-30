@@ -94,6 +94,18 @@ reliable
 6 rounds
 infared goggles#
 allows you to see in low level light conditions
+#micro bead
+can comunicate for short range (1km)
+worn in the ear
+objects and terrain can affect the range
+#xeno pelt cloak
+just a fluff item that makes you look more regal
+and might be worth some money.
+#void suit
+can survive in most hostile environments with this.
+Has tools such as tether lines,
+steel clamps
+and other useful equipment.
 ;
 @XP
 raw: 450#
@@ -157,4 +169,37 @@ stuff
 @notes
 #notes
 this is for notes
+;
+@ship
+#basics of ship
+$Tempest class strike firgate
+$1.5km long and 0.4km abeam at fins
+$mass: 6.1 megatonnes
+$crew max: 30500
+$accl: 4.7 gravs max accel
+#stufff
+speed: 8
+detection: 12
+armor: 19
+space: 42
+weapon capacity: 2
+Manoeuvrability: 18
+hull integrity: 36
+turret rating: 1
+sp: 40
+;
+@ship components
+#Starbreaker land weapon
+power: 6
+space: 4
+strength: 1
+damage: 1d10+2
+crit rating: 3
+range: 5
+#cargo hold and lighter bay
+get 50 achievment points towards criminal or trade objective
+suffer -3 to manoeuverability
+power: 1
+space: 2
+sp: 1
 ;

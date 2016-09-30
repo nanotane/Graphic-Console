@@ -193,7 +193,7 @@ public class RogueTraderStats extends Plugin{
 		{
 			if(symbolTemp.equalsIgnoreCase(sym))
 			{
-				input = input + symbolTemp;
+				input = symbolTemp + input;
 			}
 		}
 		toEdit.contents = input;
