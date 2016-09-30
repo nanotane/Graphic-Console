@@ -51,12 +51,13 @@ public class RogueTraderStats extends Plugin{
 
 				String input = theClass.waitForInput().replaceAll(" ", "");//we will also remove all spaces
 
-				if(input.equals("b"))//if they want to go back
+				if(input.equalsIgnoreCase("b"))//if they want to go back
 				{
 					if(!rtfoStack.isEmpty())//and the stack is not empty
 					{
 						pointer =  rtfoStack.pop();//then lets pop the stack and set the pointer to what we popped
 					}
+					theClass.clearChatLog();
 				}
 				else if(input.equalsIgnoreCase("q"))//if we are quiting
 				{
@@ -83,7 +84,7 @@ public class RogueTraderStats extends Plugin{
 					theClass.addToChatLog("Saved", "~", true);
 					saveRTFO(root);
 				}
-				else if(input.contains("d"))
+				else if(input.contains("d") || input.contains("D") )
 				{
 					String number = "";
 					number = input.substring(1, input.length());//grab last of string which should be the number
@@ -95,7 +96,7 @@ public class RogueTraderStats extends Plugin{
 						}
 					}
 				}
-				else if(input.contains("w"))
+				else if(input.contains("w") || input.contains("W"))
 				{
 					writeRTFO(pointer);
 				}
@@ -117,6 +118,7 @@ public class RogueTraderStats extends Plugin{
 								{
 									RTFO temp = pointer;
 									rtfoStack.push(temp);
+									theClass.clearChatLog();// Lets clear chat so things look neater
 									theClass.addToChatLog(i + " " + pointer.sub.get(i).contents, "--", true);
 									pointer = pointer.sub.get(i);
 									topwLoop = false;
@@ -189,7 +191,7 @@ public class RogueTraderStats extends Plugin{
 		theClass.addToChatLog("Type in new info and hit enter", "~", true);
 		String input = theClass.waitForInput();
 		String symbolTemp = toEdit.contents.substring(0, 1);
-		for(String sym: symbols)
+		for(String sym: symbols)//check and see if the symbol is a symbol we are working with
 		{
 			if(symbolTemp.equalsIgnoreCase(sym))
 			{

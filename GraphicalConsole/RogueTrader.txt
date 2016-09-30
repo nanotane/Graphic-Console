@@ -42,7 +42,7 @@ Can fly anthing really.
 #Concealment
 Can be used to hide from things. If still, gets +10 to roll.
 (Agility)
-#weapon skill trained
+#shiiiiiit
 ;
 @Talents:
 #Air of authority
