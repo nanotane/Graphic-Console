@@ -98,15 +98,18 @@ public class RogueTraderStats extends Plugin{
 						}
 					}
 				}
-				else if(input.contains("w") || input.contains("W"))
+				else if(input.equalsIgnoreCase("w"))
 				{
 					writeRTFO(pointer);
 				}
-				else if(input == null || input.equals("") || Integer.parseInt(input) > pointer.sub.size() || Integer.parseInt(input) < 0)
+				else if(input.equalsIgnoreCase("h"))
+				{
+					rtfsHelp();
+				}
+				else if(input == null || input.equals("") || Integer.parseInt(input) > pointer.sub.size()-1 || Integer.parseInt(input) < 0)
 				{
 					theClass.addToChatLog("out of bounds or null");
 				}
-
 				else//if not then lets see what they wanted
 				{
 					boolean topwLoop = true;//flag for if we found something
@@ -131,6 +134,24 @@ public class RogueTraderStats extends Plugin{
 				}
 			}
 		theClass.addToChatLog("Exiting rogue trader program", "~~", true);
+	}
+	/**
+	 * This will print to console all of the commands that are possible in the
+	 * RTFS plugin
+	 */
+	public void rtfsHelp()
+	{
+		theClass.addToChatLog("Navigating", "~", true);
+		theClass.addToChatLog("Type the number of the folder you want to go into and hit enter.");
+		theClass.addToChatLog("Type b and hit enter to go back to the previous folder.");
+		theClass.addToChatLog("Use the following commands to manipulate the folders.");
+		theClass.addToChatLog("Command list", "~", true);
+		theClass.addToChatLog("n -- make a new folder");
+		theClass.addToChatLog("e# -- edit a folder, where '#' is the folder you want to edit");
+		theClass.addToChatLog("d# -- delete a folder, where # is the folder you want to delete");
+		theClass.addToChatLog("w -- This will allow you to write for multiple lines. Use -s to finish writing");
+		theClass.addToChatLog("s -- This will save all changes made so far");
+		theClass.addToChatLog("q -- This will quit the plugin");
 	}
 	/**
 	 * This will allow the user to continue writing after they hit enter, 
