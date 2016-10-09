@@ -106,6 +106,9 @@ can survive in most hostile environments with this.
 Has tools such as tether lines,
 steel clamps
 and other useful equipment.
+this is a test
+of the new writing stuff
+to see if it works
 ;
 @XP
 raw: 450#

@@ -161,7 +161,7 @@ public class RogueTraderStats extends Plugin{
 		{
 			input = theClass.waitForInput();
 			//now lets check
-			if(input.equalsIgnoreCase("-qw"))
+			if(input.equalsIgnoreCase("-s"))
 			{
 				if(writingQ.peek() != null)//check the top
 				{
