@@ -1,5 +1,6 @@
 package gameFunctions;
 
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -34,6 +35,7 @@ public class RogueTraderStats extends Plugin{
 
 	public void RogueTraderStart()
 	{
+		theClass.setFontSize(18);
 		theClass.addToChatLog("Rogue trader file system", "~~", true);
 		theClass.addToChatLog("");
 		RTFO root = new RTFO();
@@ -401,5 +403,6 @@ public class RogueTraderStats extends Plugin{
 	public void run()
 	{
 		RogueTraderStart();
+		theClass.setFontSize(12);
 	}
 }

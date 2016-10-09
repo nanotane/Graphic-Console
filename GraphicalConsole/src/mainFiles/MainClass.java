@@ -319,6 +319,12 @@ public class MainClass extends JFrame
 		//if we got here thats because no fonts matched so return false
 		return false;
 	}
+	public boolean setFontSize(int newFontSize)
+	{
+		chatLog.setFont(new Font(font.getName(), font.PLAIN, newFontSize));
+		//if we got here thats because no fonts matched so return false
+		return false;
+	}
 	/**
 	 * Prints out all of the fonts available 
 	 */
