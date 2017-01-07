@@ -38,102 +38,7 @@ public class RogueTraderStats extends Plugin{
 		theClass.setFontSize(18);
 		theClass.addToChatLog("Rogue trader file system", "~~", true);
 		theClass.addToChatLog("");
-		RTFO root = new RTFO();
-		RTFO pointer = root;
-		root = readRTFile(root);
-		//		now for navigating through it
-		//Loop for navigating through entries
-		mainLoop:
-			while(true)
-			{
-				for(int i = 0; i < pointer.sub.size(); i++)//for @ entries
-				{
-					theClass.addToChatLog(i + " " +pointer.sub.get(i).contents, "*", false);
-				}
-
-				String input = theClass.waitForInput().replaceAll(" ", "");//we will also remove all spaces
-
-				if(input.equalsIgnoreCase("b"))//if they want to go back
-				{
-					if(!rtfoStack.isEmpty())//and the stack is not empty
-					{
-						pointer =  rtfoStack.pop();//then lets pop the stack and set the pointer to what we popped
-					}
-					theClass.clearChatLog();
-				}
-				else if(input.equalsIgnoreCase("q"))//if we are quiting
-				{
-					break mainLoop;
-				}
-				else if(input.contains("e"))//if we are editing
-				{
-					String number = "";
-					number = input.substring(1, input.length());//grab last of string which should be the number
-					for(int i = 0; i < pointer.sub.size(); i++)
-					{
-						if(number.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
-						{
-							editRTFO(pointer.sub.get(i));
-						}
-					}
-				}
-				else if(input.equalsIgnoreCase("n"))
-				{
-					pointer = createRTFO(pointer);
-				}
-				else if(input.equalsIgnoreCase("s"))
-				{
-					theClass.addToChatLog("Saved", "~", true);
-					saveRTFO(root);
-				}
-				else if(input.contains("d") || input.contains("D") )
-				{
-					String number = "";
-					number = input.substring(1, input.length());//grab last of string which should be the number
-					for(int i = 0; i < pointer.sub.size(); i++)
-					{
-						if(number.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
-						{
-							deleteRTFO(pointer, i);
-						}
-					}
-				}
-				else if(input.equalsIgnoreCase("w"))
-				{
-					writeRTFO(pointer);
-				}
-				else if(input.equalsIgnoreCase("h"))
-				{
-					rtfsHelp();
-				}
-				else if(input == null || input.equals("") || Integer.parseInt(input) > pointer.sub.size()-1 || Integer.parseInt(input) < 0)
-				{
-					theClass.addToChatLog("out of bounds or null");
-				}
-				else//if not then lets see what they wanted
-				{
-					boolean topwLoop = true;//flag for if we found something
-					while(topwLoop)
-					{
-						//now choose a section
-						topfLoop:
-							for(int i = 0; i < pointer.sub.size(); i++)
-							{
-								if(input.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
-								{
-									RTFO temp = pointer;
-									rtfoStack.push(temp);
-									theClass.clearChatLog();// Lets clear chat so things look neater
-									theClass.addToChatLog(i + " " + pointer.sub.get(i).contents, "--", true);
-									pointer = pointer.sub.get(i);
-									topwLoop = false;
-									break topfLoop;
-								}
-							}
-					}
-				}
-			}
-		theClass.addToChatLog("Exiting rogue trader program", "~~", true);
+		selectionMenu();
 	}
 	/**
 	 * This will print to console all of the commands that are possible in the
@@ -257,7 +162,7 @@ public class RogueTraderStats extends Plugin{
 				}
 				else
 				{
-					if(root.sub.get(0).contents.contains(sym))//see if one of the children contains a symbol
+					if(root.sub.get(0).contents.contains(sym))
 					{
 						newSym = sym;
 					}
@@ -295,9 +200,9 @@ public class RogueTraderStats extends Plugin{
 	}
 	/**
 	 * This will traverse the elements of the tree and print them to the file
-	 * @param pointer 
-	 * @param fw
-	 * @param pw
+	 * @param pointer RTFO pointer
+	 * @param fw file writer
+	 * @param pw print writer
 	 */
 	public void traverse(RTFO pointer, FileWriter fw, PrintWriter pw)
 	{
@@ -385,10 +290,9 @@ public class RogueTraderStats extends Plugin{
 		}
 		catch(FileNotFoundException ex) {
 			theClass.addToChatLog(
-					"Unable to open file '" + 
-							"file" + fileName);    
+					"Unable to open file:" + fileName);    
 			theClass.addToChatLog("Creating basic file....");
-			makeNewFile();
+			makeDefaultFile();
 			readRTFile(root);
 		} catch (IOException e) {
 			theClass.addToChatLog("IO Exception ocurred");
@@ -397,7 +301,10 @@ public class RogueTraderStats extends Plugin{
 		return root;
 	}
 
-	public void makeNewFile()
+	/**
+	 * Makes a default file 
+	 */
+	public void makeDefaultFile()
 	{
 		FileWriter fw = null;
 		try {
@@ -418,6 +325,133 @@ public class RogueTraderStats extends Plugin{
 			e.printStackTrace();
 		}
 		pw.close();
+	}
+	
+	/**
+	 * Make a new file with a specific name
+	 * @param newFileName file name
+	 */
+	public void makeNewFile(String newFileName)
+	{
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter(newFileName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		PrintWriter pw = new PrintWriter(fw, true);
+		pw.println("@folder1");
+		pw.println(";");
+		pw.println("@folder2");
+		pw.println(";");
+		pw.println("@folder3");
+		pw.println(";");
+		try {
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		pw.close();
+	}
+	
+	public void selectionMenu()
+	{
+		RTFO root = new RTFO();
+		RTFO pointer = root;
+		root = readRTFile(root);
+		//		now for navigating through it
+		//Loop for navigating through entries
+		mainLoop:
+			while(true)
+			{
+				for(int i = 0; i < pointer.sub.size(); i++)//for @ entries
+				{
+					theClass.addToChatLog(i + " " +pointer.sub.get(i).contents, "*", false);
+				}
+
+				String input = theClass.waitForInput().replaceAll(" ", "");//we will also remove all spaces
+
+				if(input.equalsIgnoreCase("b"))//if they want to go back
+				{
+					if(!rtfoStack.isEmpty())//and the stack is not empty
+					{
+						pointer =  rtfoStack.pop();//then lets pop the stack and set the pointer to what we popped
+					}
+					theClass.clearChatLog();
+				}
+				else if(input.equalsIgnoreCase("q"))//if we are quiting
+				{
+					break mainLoop;
+				}
+				else if(input.contains("e"))//if we are editing
+				{
+					String number = "";
+					number = input.substring(1, input.length());//grab last of string which should be the number
+					for(int i = 0; i < pointer.sub.size(); i++)
+					{
+						if(number.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
+						{
+							editRTFO(pointer.sub.get(i));
+						}
+					}
+				}
+				else if(input.equalsIgnoreCase("n"))
+				{
+					pointer = createRTFO(pointer);
+				}
+				else if(input.equalsIgnoreCase("s"))
+				{
+					theClass.addToChatLog("Saved", "~", true);
+					saveRTFO(root);
+				}
+				else if(input.contains("d") || input.contains("D") )
+				{
+					String number = "";
+					number = input.substring(1, input.length());//grab last of string which should be the number
+					for(int i = 0; i < pointer.sub.size(); i++)
+					{
+						if(number.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
+						{
+							deleteRTFO(pointer, i);
+						}
+					}
+				}
+				else if(input.equalsIgnoreCase("w"))
+				{
+					writeRTFO(pointer);
+				}
+				else if(input.equalsIgnoreCase("h"))
+				{
+					rtfsHelp();
+				}
+				else if(input == null || input.equals("") || Integer.parseInt(input) > pointer.sub.size()-1 || Integer.parseInt(input) < 0)
+				{
+					theClass.addToChatLog("out of bounds or null");
+				}
+				else//if not then lets see what they wanted
+				{
+					boolean selectionLoopFlag = true;//flag for if we found something
+					while(selectionLoopFlag)
+					{
+						//now choose a section
+						selectionLoop:
+							for(int i = 0; i < pointer.sub.size(); i++)
+							{
+								if(input.equalsIgnoreCase(Integer.toString(i)))//if the section number is right
+								{
+									RTFO temp = pointer;
+									rtfoStack.push(temp);
+									theClass.clearChatLog();// Lets clear chat so things look neater
+									theClass.addToChatLog(i + " " + pointer.sub.get(i).contents, "--", true);
+									pointer = pointer.sub.get(i);
+									selectionLoopFlag = false;
+									break selectionLoop;
+								}
+							}
+					}
+				}
+			}
+		theClass.addToChatLog("Exiting rogue trader program", "~~", true);
 	}
 	
 	@Override

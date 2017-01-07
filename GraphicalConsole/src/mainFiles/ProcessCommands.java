@@ -103,9 +103,9 @@ public class ProcessCommands implements Runnable {
 			}
 			else if(theInput.contains("/test"))
 			{
-				String toWrite[] = {"a", "b", "c", "d", "e"};
-				fileRW.writeAll("test.txt", toWrite);
-				fileRW.read("test.txt");
+//				String toWrite[] = {"a", "b", "c", "d", "e"};
+//				fileRW.writeAll("test.txt", toWrite);
+//				fileRW.readPrint("test.txt");
 			}
 			else //if it was not a built in function then lets go through the programs list 
 			{
@@ -127,10 +127,12 @@ public class ProcessCommands implements Runnable {
 	private void cpSettings()
 	{
 		String input;
-
+		ArrayList<String> contents = new ArrayList<String>(); 
+				String fileName = theClass.getSettingsFileName();
 		Color newColorF;
 		Color newColorB;
-		Color oldColorF = theClass.forgroundColor;//lets grab the old colors
+		//lets grab the old colors
+		Color oldColorF = theClass.foregroundColor;
 		Color oldColorB = theClass.backgroundColor;
 		int r = 0;
 		int g = 0;
@@ -138,17 +140,23 @@ public class ProcessCommands implements Runnable {
 		
 		while(true)
 		{
-			//setting the forground color
+			//setting the foreground color
 			theClass.addToChatLog("~Setting foreground Color~");
 			r = rgbCheck(r, "red");
+			contents.add(Integer.toString(r));
 			g = rgbCheck(g, "green");
+			contents.add(Integer.toString(g));
 			b = rgbCheck(b, "blue");
+			contents.add(Integer.toString(b));
 			newColorF = new Color(r,g,b);
 			//setting the background color
 			theClass.addToChatLog("~Setting background Color~");
 			r = rgbCheck(r, "red");
+			contents.add(Integer.toString(r));
 			g = rgbCheck(g, "green");
+			contents.add(Integer.toString(g));
 			b = rgbCheck(b, "blue");
+			contents.add(Integer.toString(b));
 			newColorB = new Color(r,g,b);
 
 			//change to new colors
@@ -161,6 +169,8 @@ public class ProcessCommands implements Runnable {
 			if(input.equalsIgnoreCase("y"))
 			{
 				theClass.addToChatLog("~Colors Changed~");
+				
+				theClass.setSettings(fileName, contents);
 				break;
 			}
 			else

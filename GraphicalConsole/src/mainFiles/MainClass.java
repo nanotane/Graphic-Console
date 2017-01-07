@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 import javax.swing.BorderFactory;
@@ -44,13 +45,15 @@ public class MainClass extends JFrame
 	
 	//This is a special string that indicates that we do not have new input
 	protected String noInputString = "#$%NO%$#";//This is a weird sequence of characters so that way we know a user didnt type it
-	protected Color forgroundColor = new Color(21, 180, 255);
+	protected Color foregroundColor = new Color(21, 180, 255);
 	//91 255 45
 	//past colors: 73, 228, 241, a shade of cyna
 	protected Font font = new Font("Verdana", Font.PLAIN, 12);//setting the font size and style
 	protected Color backgroundColor = Color.black;
 	
 	protected ProcessCommands theCommands = new ProcessCommands(this);//this is needed 
+	private ReadWrite fileManager = new ReadWrite(this);
+	private String settingsFile = "settings.gc";
 	/*
 	 * These are the strings that determine the names of certain components 
 	 * in the GUI
@@ -65,6 +68,7 @@ public class MainClass extends JFrame
 	 */
 	public MainClass()
 	{
+		this.getSettings();
 		this.setSize(MAX_X, MAX_Y);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -93,10 +97,10 @@ public class MainClass extends JFrame
 		
 		messageInput = new JTextField(30);
 		messageInput.setBackground(Color.DARK_GRAY);
-		messageInput.setForeground(forgroundColor);
+		messageInput.setForeground(foregroundColor);
 		messageInput.setFont(font);
 		messageInput.setBorder(empty);
-		messageInput.setCaretColor(forgroundColor);
+		messageInput.setCaretColor(foregroundColor);
 		//This is the key listener so the component can listen for the enter key to send the commands
 		messageInput.addKeyListener(new KeyListener(){
 			//unused
@@ -131,7 +135,7 @@ public class MainClass extends JFrame
         chatLog.setFont(font);
 		scrollypolly = new JScrollPane(chatLog);
 		chatLog.setEditable(false);
-		chatLog.setForeground(forgroundColor);
+		chatLog.setForeground(foregroundColor);
 		chatLog.setBackground(backgroundColor);
 		chatLog.setBorder(empty);
 		scrollypolly.setBorder(empty);
@@ -142,7 +146,7 @@ public class MainClass extends JFrame
 		lowerPanel.setLayout(new GridLayout(2,0, 0, 5));//Contains the lowerPanelbuttons and the inputmessage
 
 		//setting colors
-		sendInputButton.setBackground(forgroundColor);
+		sendInputButton.setBackground(foregroundColor);
 		//adding panels
 		lowerPanel.add(messageInput);
 		//adding components to the second panel
@@ -367,9 +371,46 @@ public class MainClass extends JFrame
 		chatLog.setText("");
 	}
 	
+	/**
+	 * Load the settings from a settings file. If no setting file found
+	 * a new one will be made with the default settings
+	 */
+	public void getSettings()
+	{
+		/*
+		 * This is not the best way to read from a file but it was quick to make
+		 */
+		ArrayList<String> settingsContent = fileManager.read(settingsFile);
+		if(settingsContent != null && settingsContent.size() > 0)
+		{
+			//index 1-3 have the rgb of the forgound color
+			foregroundColor = new Color(Integer.parseInt(settingsContent.get(0)),
+					Integer.parseInt(settingsContent.get(1)),
+					Integer.parseInt(settingsContent.get(2)));
+			//index 4-6 have the rgb of the background color
+			backgroundColor = new Color(Integer.parseInt(settingsContent.get(3)),
+					Integer.parseInt(settingsContent.get(4)),
+					Integer.parseInt(settingsContent.get(5)));
+		}
+		
+	}
+	
+	/**
+	 * Save the settings given
+	 */
+	public void setSettings(String fileName, ArrayList<String>contents)
+	{
+		fileManager.writeAll(fileName, contents);
+	}
+	
 	//Main method
 	public static void main(String args[])
 	{
 		MainClass test = new MainClass();
+	}
+	
+	public String getSettingsFileName()
+	{
+		return settingsFile;
 	}
 }
