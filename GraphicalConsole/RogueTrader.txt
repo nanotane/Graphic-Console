@@ -1,4 +1,4 @@
-@Skills
+@stuff
 #Ballistic trained
 +15 (60)
 #Willpower intermediate

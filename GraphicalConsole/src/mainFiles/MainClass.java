@@ -403,14 +403,26 @@ public class MainClass extends JFrame
 		fileManager.writeAll(fileName, contents);
 	}
 	
-	//Main method
-	public static void main(String args[])
-	{
-		MainClass test = new MainClass();
-	}
+
 	
 	public String getSettingsFileName()
 	{
 		return settingsFile;
+	}
+	
+	/**
+	 * Put something into the input field. Useful for allowing the user to 
+	 * edit content
+	 * @param input 
+	 */
+	public void setInputField(String input)
+	{
+		this.messageInput.setText(input);
+	}
+	
+	//Main method
+	public static void main(String args[])
+	{
+		MainClass test = new MainClass();
 	}
 }

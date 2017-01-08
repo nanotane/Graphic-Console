@@ -60,7 +60,7 @@ public class RogueTraderStats extends Plugin{
 	}
 	/**
 	 * This will allow the user to continue writing after they hit enter, 
-	 * and until they type -qw
+	 * and until they type -s
 	 * @param root
 	 */
 	public void writeRTFO(RTFO root)
@@ -117,6 +117,7 @@ public class RogueTraderStats extends Plugin{
 	public void editRTFO(RTFO toEdit)
 	{
 		theClass.addToChatLog("Type in new info and hit enter", "~", true);
+		theClass.setInputField(toEdit.contents.substring(1));
 		String input = theClass.waitForInput();
 		String symbolTemp = toEdit.contents.substring(0, 1);
 		for(String sym: symbols)//check and see if the symbol is a symbol we are working with
