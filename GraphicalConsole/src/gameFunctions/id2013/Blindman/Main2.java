@@ -1,5 +1,5 @@
 package gameFunctions.id2013.Blindman;
-import mainFiles.MainClass;
+import mainFiles.ConsoleGraphics;
 import mainFiles.Plugin;
 //to do:make boxes work,create new levels, music?
 /**
@@ -26,7 +26,7 @@ public class Main2 extends Plugin
 	public   boolean complete = false;
 	public   int level = 1;
 
-	public Main2(MainClass a)
+	public Main2(ConsoleGraphics a)
 	{
 		super(a);
 		this.name = "Blind man Game";
@@ -38,8 +38,8 @@ public class Main2 extends Plugin
 	
 	
 	public   void position() {
-		theClass.addToChatLog(y + "");
-		theClass.addToChatLog(x+ "");
+		gConsole.addToChatLog(y + "");
+		gConsole.addToChatLog(x+ "");
 	}
 
 	public   boolean wallcheck() throws InterruptedException {// TODO
@@ -78,21 +78,21 @@ public class Main2 extends Plugin
 			trapCheck();
 		}
 		if (boardData.board[y + 1][x] == 7 && s3.equalsIgnoreCase(c1)) {
-			theClass.addToChatLog("What is this metal shape in the darkness? You decide to hide it from Him.");
+			gConsole.addToChatLog("What is this metal shape in the darkness? You decide to hide it from Him.");
 			reCord++;
 		}
 		if (boardData.board[y - 1][x] == 7 && s3.equalsIgnoreCase(c2)) {
 
-			theClass.addToChatLog("What is this metal shape in the darkness? You decide to hide it from Him.");
+			gConsole.addToChatLog("What is this metal shape in the darkness? You decide to hide it from Him.");
 			reCord++;
 		}
 		if (boardData.board[y][x + 1] == 7 && s3.equalsIgnoreCase(c3)) {
 
-			theClass.addToChatLog("What is this metal shape in the darkness? You decide to hide it from Him.");
+			gConsole.addToChatLog("What is this metal shape in the darkness? You decide to hide it from Him.");
 			reCord++;
 		}
 		if (boardData.board[y][x - 1] == 7 && s3.equalsIgnoreCase(c4)) {
-			theClass.addToChatLog("What is this metal shape in the darkness? You decide to hide it from Him.");
+			gConsole.addToChatLog("What is this metal shape in the darkness? You decide to hide it from Him.");
 			reCord++;
 		}
 
@@ -102,23 +102,23 @@ public class Main2 extends Plugin
 
 	public   boolean gameCheck() throws InterruptedException {
 		boolean complete = false;
-		theClass.addToChatLog("In the dark you feel a door handle");
+		gConsole.addToChatLog("In the dark you feel a door handle");
 		// TODO
-		theClass.addToChatLog("Would you like to leave, Blind Man?");
-		s3 = theClass.waitForInput();
+		gConsole.addToChatLog("Would you like to leave, Blind Man?");
+		s3 = gConsole.waitForInput();
 		if (s3.equalsIgnoreCase(s1)) {
 			complete = true;
 		}
 
-		theClass.addToChatLog("You decide to leave.");
+		gConsole.addToChatLog("You decide to leave.");
 		reCord = 0;
-		theClass.addToChatLog("Would you like to continue Blind Man?");
-		s3 = theClass.waitForInput();
+		gConsole.addToChatLog("Would you like to continue Blind Man?");
+		s3 = gConsole.waitForInput();
 		if (s3.equalsIgnoreCase(s1)) {
 			boardData.lvl2();
 			level++;
 		} else {
-			theClass.addToChatLog("This is the end Blind Man.");
+			gConsole.addToChatLog("This is the end Blind Man.");
 			Thread.sleep(3000);
 			System.exit(0);
 
@@ -128,22 +128,22 @@ public class Main2 extends Plugin
 
 	public   boolean trapCheck() {// TODO
 		if (boardData.board[y + 1][x] == 8 && s3.equalsIgnoreCase(c1)) {// forward
-			theClass.addToChatLog("Your screams are cut short as the trap finishes it's work.");
+			gConsole.addToChatLog("Your screams are cut short as the trap finishes it's work.");
 			gameEnd = false;
 			reCord = 0;
 		}
 		if (boardData.board[y - 1][x] == 8 && s3.equalsIgnoreCase(c2)) {
-			theClass.addToChatLog("Your screams are cut short as the trap finishes it's work.");
+			gConsole.addToChatLog("Your screams are cut short as the trap finishes it's work.");
 			gameEnd = false;
 			reCord = 0;
 		}
 		if (boardData.board[y][x + 1] == 8 && s3.equalsIgnoreCase(c3)) {
-			theClass.addToChatLog("Your screams are cut short as the trap finishes it's work.");
+			gConsole.addToChatLog("Your screams are cut short as the trap finishes it's work.");
 			gameEnd = false;
 			reCord = 0;
 		}
 		if (boardData.board[y][x - 1] == 8 && s3.equalsIgnoreCase(c4)) {
-			theClass.addToChatLog("Your screams are cut short as the trap finishes it's work.");
+			gConsole.addToChatLog("Your screams are cut short as the trap finishes it's work.");
 			gameEnd = false;
 			reCord = 0;
 		}
@@ -156,44 +156,44 @@ public class Main2 extends Plugin
 	 */
 	public void runBlindMan() throws InterruptedException {
 		boardData.lvl1();
-		theClass.addToChatLog("Would you like to play the game?");
-		s3 = theClass.waitForInput();
+		gConsole.addToChatLog("Would you like to play the game?");
+		s3 = gConsole.waitForInput();
 
 		if (s3.equalsIgnoreCase(s1)) {
-			theClass.addToChatLog("Listen to Commands.");
+			gConsole.addToChatLog("Listen to Commands.");
 			Thread.sleep(3000);
-			theClass.addToChatLog("Follow the Rules.");
+			gConsole.addToChatLog("Follow the Rules.");
 			Thread.sleep(3000);
-			theClass.addToChatLog("You may move forward, back, to the left or to the right.");
-			theClass.addToChatLog("Listen to Commands.");
+			gConsole.addToChatLog("You may move forward, back, to the left or to the right.");
+			gConsole.addToChatLog("Listen to Commands.");
 			Thread.sleep(3000);
-			theClass.addToChatLog("Explore");
+			gConsole.addToChatLog("Explore");
 			Thread.sleep(3000);
-			theClass.addToChatLog("Goodbye Blind Man.");
+			gConsole.addToChatLog("Goodbye Blind Man.");
 			Thread.sleep(12000);
 
 		} else if (s3.equalsIgnoreCase(commandOveride)) {
-			theClass.addToChatLog("Cutscene skipped.");
+			gConsole.addToChatLog("Cutscene skipped.");
 		} else {
-			theClass.addToChatLog("This is the end Blind Man.");
+			gConsole.addToChatLog("This is the end Blind Man.");
 			Thread.sleep(3000);
 			System.exit(0);
 
 		}
 		reCord = 0;
-		theClass.addToChatLog("Hello.");
+		gConsole.addToChatLog("Hello.");
 		Thread.sleep(3000);
-		theClass.addToChatLog("Wake.");
+		gConsole.addToChatLog("Wake.");
 		Thread.sleep(3000);
-		theClass.addToChatLog("Escape.");
+		gConsole.addToChatLog("Escape.");
 		Thread.sleep(3000);
-		theClass.addToChatLog("Survive.");
+		gConsole.addToChatLog("Survive.");
 		Thread.sleep(3000);
-		theClass.addToChatLog("Let the game begin again.");
+		gConsole.addToChatLog("Let the game begin again.");
 		Thread.sleep(3000);
 		while (gameEnd) {
-			theClass.addToChatLog("Now which way would you like to go?");
-			s3 = theClass.waitForInput();
+			gConsole.addToChatLog("Now which way would you like to go?");
+			s3 = gConsole.waitForInput();
 			// theClass.addToChatLog("Data recieved");
 			if (s3.equalsIgnoreCase(c1)) // forward
 			{
@@ -206,10 +206,10 @@ public class Main2 extends Plugin
 					boardData.board[y - 1][x] = 0;
 
 				} else {
-					theClass.addToChatLog("You have hit something solid.");
+					gConsole.addToChatLog("You have hit something solid.");
 					Thread.sleep(1000);
-					theClass.addToChatLog("This could be a box you can break through by pushing");
-					theClass.addToChatLog("or a wall.");
+					gConsole.addToChatLog("This could be a box you can break through by pushing");
+					gConsole.addToChatLog("or a wall.");
 
 				}
 
@@ -221,10 +221,10 @@ public class Main2 extends Plugin
 					boardData.board[y + 1][x] = 0;
 
 				} else {
-					theClass.addToChatLog("You have hit something solid.");
+					gConsole.addToChatLog("You have hit something solid.");
 					Thread.sleep(1000);
-					theClass.addToChatLog("This could be a box you can break through by pushing");
-					theClass.addToChatLog("or a wall.");
+					gConsole.addToChatLog("This could be a box you can break through by pushing");
+					gConsole.addToChatLog("or a wall.");
 				}
 			} else if (s3.equalsIgnoreCase(c3))// left TODO
 			{
@@ -234,10 +234,10 @@ public class Main2 extends Plugin
 					boardData.board[y][x - 1] = 0;
 
 				} else {
-					theClass.addToChatLog("You have hit something solid.");
+					gConsole.addToChatLog("You have hit something solid.");
 					Thread.sleep(1000);
-					theClass.addToChatLog("This could be a box you can break through by pushing");
-					theClass.addToChatLog("or a wall.");
+					gConsole.addToChatLog("This could be a box you can break through by pushing");
+					gConsole.addToChatLog("or a wall.");
 					;
 				}
 			} else if (s3.equalsIgnoreCase(c4))// right
@@ -249,47 +249,47 @@ public class Main2 extends Plugin
 					boardData.board[y][x + 1] = 0;
 
 				} else {
-					theClass.addToChatLog("You have hit something solid.");
+					gConsole.addToChatLog("You have hit something solid.");
 					Thread.sleep(1000);
-					theClass.addToChatLog("This could be a box you can break through by pushing");
-					theClass.addToChatLog("or a wall.");
+					gConsole.addToChatLog("This could be a box you can break through by pushing");
+					gConsole.addToChatLog("or a wall.");
 				}
 			}
 
 		}
 		if (reCord < 3 && reCord > 0 && complete == true && level == 1) {
-			theClass.addToChatLog("The objects are voice recorders. You listen in secret.");
+			gConsole.addToChatLog("The objects are voice recorders. You listen in secret.");
 			Thread.sleep(3000);
-			theClass.addToChatLog("eports of...sudden attacks..3 million de...");
+			gConsole.addToChatLog("eports of...sudden attacks..3 million de...");
 		}
 		if (reCord < 5 && reCord > 3 && complete == true && level == 1) {
-			theClass.addToChatLog("The objects are voice recorders. You listen in secret.");
+			gConsole.addToChatLog("The objects are voice recorders. You listen in secret.");
 			Thread.sleep(3000);
-			theClass.addToChatLog("eports of...sudden attacks..3 million de...");
-			theClass.addToChatLog("erment is...ilitary law...coup...project titled...");
+			gConsole.addToChatLog("eports of...sudden attacks..3 million de...");
+			gConsole.addToChatLog("erment is...ilitary law...coup...project titled...");
 		}
 		if (reCord < 7 && reCord > 4 && complete == true && level == 1) {
-			theClass.addToChatLog("The objects are voice recorders. You listen in secret.");
+			gConsole.addToChatLog("The objects are voice recorders. You listen in secret.");
 			Thread.sleep(3000);
-			theClass.addToChatLog("eports of...sudden attacks..3 million de...");
-			theClass.addToChatLog("erment is...ilitary law...coup...project titled...");
-			theClass.addToChatLog("d Man...bility...church...ope has decr...eath on the stre...nuclear opti...");
+			gConsole.addToChatLog("eports of...sudden attacks..3 million de...");
+			gConsole.addToChatLog("erment is...ilitary law...coup...project titled...");
+			gConsole.addToChatLog("d Man...bility...church...ope has decr...eath on the stre...nuclear opti...");
 
 		}
 		if (reCord == 1 && complete == true && level == 2) {
-			theClass.addToChatLog("The objects are voice recorders. You listen in secret.");
-			theClass.addToChatLog("SA...ussia...ar...vasion.");
+			gConsole.addToChatLog("The objects are voice recorders. You listen in secret.");
+			gConsole.addToChatLog("SA...ussia...ar...vasion.");
 		}
 		if (reCord == 2 && complete == true && level == 2) {
-			theClass.addToChatLog("The objects are voice recorders. You listen in secret.");
-			theClass.addToChatLog("SA...ussia...ar...vasion.");
-			theClass.addToChatLog("d Man...revolution...he Blue Guard...");
+			gConsole.addToChatLog("The objects are voice recorders. You listen in secret.");
+			gConsole.addToChatLog("SA...ussia...ar...vasion.");
+			gConsole.addToChatLog("d Man...revolution...he Blue Guard...");
 		}
 		if (reCord == 3 && complete == true && level == 2) {
-			theClass.addToChatLog("The objects are voice recorders. You listen in secret.");
-			theClass.addToChatLog("SA...ussia...ar...vasion.");
-			theClass.addToChatLog("d Man...revolution...he Blue Guard...");
-			theClass.addToChatLog("shington...dest...ast hope...Blin...wa...");
+			gConsole.addToChatLog("The objects are voice recorders. You listen in secret.");
+			gConsole.addToChatLog("SA...ussia...ar...vasion.");
+			gConsole.addToChatLog("d Man...revolution...he Blue Guard...");
+			gConsole.addToChatLog("shington...dest...ast hope...Blin...wa...");
 
 		}
 	}
@@ -301,8 +301,8 @@ public class Main2 extends Plugin
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			theClass.addToChatLog("THE BLIND MAN GAME HAS CRASHED");
-			theClass.addToChatLog("INTERRUPT EXCEPTION OCCURRED");
+			gConsole.addToChatLog("THE BLIND MAN GAME HAS CRASHED");
+			gConsole.addToChatLog("INTERRUPT EXCEPTION OCCURRED");
 		}
 	}
 }

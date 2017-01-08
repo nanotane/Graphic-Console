@@ -1,12 +1,12 @@
 package calculatingFunctions;
 
-import mainFiles.MainClass;
+import mainFiles.ConsoleGraphics;
 import mainFiles.Plugin;
 
 public class BasicCalc extends Plugin
 {
 	private String[] operators = {"+", "-", "*", "/", "^" };
-	public BasicCalc(MainClass a)
+	public BasicCalc(ConsoleGraphics a)
 	{
 		super(a);
 		this.name = "Basic Calculator";
@@ -31,27 +31,27 @@ public class BasicCalc extends Plugin
 		int opToPerform = -1;
 		String theInput;
 		String operation;
-		theClass.addToChatLog("Basic Calculator V0.1");
-		theClass.addToChatLog("Type calc-help for commands and their functions");
+		gConsole.addToChatLog("Basic Calculator V0.1");
+		gConsole.addToChatLog("Type calc-help for commands and their functions");
 		
 		while(true)
 		{
-			theClass.addToChatLog("Type in a calculation:");
+			gConsole.addToChatLog("Type in a calculation:");
 			
-			theInput = theClass.checkForInput();
-			theInput = theClass.waitForInput();//this will wait for input from the GUI
+			theInput = gConsole.checkForInput();
+			theInput = gConsole.waitForInput();//this will wait for input from the GUI
 			theInput.replace(" ", "");//first lets replace all spaces with empty space
 			if(preProcessInp(theInput))
 			{
 				//checks to see if we are exiting the program
-				theClass.addToChatLog("Exiting Calculator Program");
+				gConsole.addToChatLog("Exiting Calculator Program");
 				return;
 			}
 			else if(theInput.equals("calc-help"))
 			{
-				theClass.addToChatLog("Type one number, an operator such as ");
-				theClass.addToChatLog("+, -, *, / or ^ and then a second number");
-				theClass.addToChatLog("type exit to exit the program");
+				gConsole.addToChatLog("Type one number, an operator such as ");
+				gConsole.addToChatLog("+, -, *, / or ^ and then a second number");
+				gConsole.addToChatLog("type exit to exit the program");
 			}
 			//now lets check and see if they have an operator in their statement
 			for(int i = 0; i < 5;i++)
@@ -73,13 +73,13 @@ public class BasicCalc extends Plugin
 						}
 						catch(NumberFormatException e)
 						{
-							theClass.addToChatLog("Illegal characters in second number");
+							gConsole.addToChatLog("Illegal characters in second number");
 							opToPerform = -1;
 						}
 					}
 					catch(NumberFormatException e)
 					{
-						theClass.addToChatLog("Illegal characters in first number");
+						gConsole.addToChatLog("Illegal characters in first number");
 						
 					}
 					
@@ -116,11 +116,11 @@ public class BasicCalc extends Plugin
 					answer = Math.pow(firstNum, secondNum);
 				}
 				String temp = Double.toString(answer);
-				theClass.addToChatLog(temp);
+				gConsole.addToChatLog(temp);
 			}
 			else
 			{
-				theClass.addToChatLog("Calculation failed");
+				gConsole.addToChatLog("Calculation failed");
 			}
 			
 			//now print out the answer if we can

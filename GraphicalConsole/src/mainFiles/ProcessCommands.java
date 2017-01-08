@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ProcessCommands implements Runnable {
 
-	private MainClass theClass;
+	private ConsoleGraphics theClass;
 	private String theInput = "";
 	private ArrayList<Plugin> programList = new ArrayList<Plugin>();
 	private PluginLoader loader = new PluginLoader();
@@ -17,7 +17,7 @@ public class ProcessCommands implements Runnable {
 	 * Creates command objects and puts them into an array list
 	 * @param a the MainClass object that this is pointing to
 	 */
-	public ProcessCommands(MainClass a)
+	public ProcessCommands(ConsoleGraphics a)
 	{
 		theClass = a;
 		//this will load all of the programs and return them in the programlist

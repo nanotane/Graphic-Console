@@ -8,7 +8,7 @@
  */
 
 package calculatingFunctions;
-import mainFiles.MainClass;
+import mainFiles.ConsoleGraphics;
 import mainFiles.Plugin;
 /**
  * This program converts units, speed, length, and volume.
@@ -26,7 +26,7 @@ public class SimpleConverter extends Plugin
 	
 
 
-	public SimpleConverter(MainClass a)
+	public SimpleConverter(ConsoleGraphics a)
 	{		
 		super(a);
 		charts();
@@ -48,17 +48,17 @@ public class SimpleConverter extends Plugin
 		//double answer = 0;
 		String measurementInput;
 		
-		theClass.addToChatLog("Basic Converter");
-		theClass.addToChatLog("Enter your measurement type: volume, length, or speed");
-		measurementInput = theClass.checkForInput();
-		measurementInput = theClass.waitForInput();//this will wait for input from the GUI
+		gConsole.addToChatLog("Basic Converter");
+		gConsole.addToChatLog("Enter your measurement type: volume, length, or speed");
+		measurementInput = gConsole.checkForInput();
+		measurementInput = gConsole.waitForInput();//this will wait for input from the GUI
 		measurementInput.replace(" ", "");//first lets replace all spaces with empty space
 
 		while(true)
 		{
 			if(preProcessInp(measurementInput))
 			{
-				theClass.addToChatLog("Exiting the Converter");
+				gConsole.addToChatLog("Exiting the Converter");
 				return;
 			}
 			else if(measurementInput.equalsIgnoreCase("volume"))
@@ -75,7 +75,7 @@ public class SimpleConverter extends Plugin
 			}
 			else
 			{
-				theClass.addToChatLog("Enter \"volume\", \"length\", or \"speed\"");
+				gConsole.addToChatLog("Enter \"volume\", \"length\", or \"speed\"");
 				return;
 			}
 		}
@@ -87,36 +87,36 @@ public class SimpleConverter extends Plugin
 		String unitInput;
 		String inputValue;
 		
-		theClass.addToChatLog("Would you like to convert from gallons or liters");
-		unitInput = theClass.checkForInput();
-		unitInput = theClass.waitForInput();//this will wait for input from the GUI
+		gConsole.addToChatLog("Would you like to convert from gallons or liters");
+		unitInput = gConsole.checkForInput();
+		unitInput = gConsole.waitForInput();//this will wait for input from the GUI
 		unitInput.replace(" ", "");//first lets replace all spaces with empty space
 		try{
 			
 		if(unitInput.equalsIgnoreCase("gallons"))
 		{
-			theClass.addToChatLog("How many gallons would you like to convert?");
-			inputValue = theClass.checkForInput();
-			inputValue = theClass.waitForInput();//this will wait for input from the GUI
+			gConsole.addToChatLog("How many gallons would you like to convert?");
+			inputValue = gConsole.checkForInput();
+			inputValue = gConsole.waitForInput();//this will wait for input from the GUI
 			inputValue.replace(" ", "");//first lets replace all spaces with empty space
 			double value = Double.parseDouble(inputValue);
 			
 			double liters = value * 3.78541;
 			
-			theClass.addToChatLog(value + " gallons = "+ liters + " liters" );
+			gConsole.addToChatLog(value + " gallons = "+ liters + " liters" );
 			
 		}
 		else if(unitInput.equalsIgnoreCase("liters"))
 		{
-			theClass.addToChatLog("How many liters would you like to convert?");
-			inputValue = theClass.checkForInput();
-			inputValue = theClass.waitForInput();//this will wait for input from the GUI
+			gConsole.addToChatLog("How many liters would you like to convert?");
+			inputValue = gConsole.checkForInput();
+			inputValue = gConsole.waitForInput();//this will wait for input from the GUI
 			inputValue.replace(" ", "");//first lets replace all spaces with empty space
 			double value = Double.parseDouble(inputValue);
 			
 			double gallons = value * (1/3.78541);
 			
-			theClass.addToChatLog(value + " liters = "+ gallons + " gallons" );
+			gConsole.addToChatLog(value + " liters = "+ gallons + " gallons" );
 		}
 		else if(unitInput.equalsIgnoreCase("exit"))
 		{
@@ -125,7 +125,7 @@ public class SimpleConverter extends Plugin
 		}
 		catch(NumberFormatException e)
 		{
-			theClass.addToChatLog("Type in a number");
+			gConsole.addToChatLog("Type in a number");
 		}
 	}
 
@@ -137,10 +137,10 @@ public class SimpleConverter extends Plugin
 		String unitInputB;
 		String inputValue;
 		
-		theClass.addToChatLog("Which unit would you like to convert from? inches, feet, yards, miles, cm, meters, or km" );
+		gConsole.addToChatLog("Which unit would you like to convert from? inches, feet, yards, miles, cm, meters, or km" );
 		
-		unitInputA = theClass.checkForInput();
-		unitInputA = theClass.waitForInput();//this will wait for input from the GUI
+		unitInputA = gConsole.checkForInput();
+		unitInputA = gConsole.waitForInput();//this will wait for input from the GUI
 		unitInputA.replace(" ", "");//first lets replace all spaces with empty space
 		if(unitInputA.equalsIgnoreCase("exit"))
 				{
@@ -154,10 +154,10 @@ public class SimpleConverter extends Plugin
 			}	
 		}
 		
-		theClass.addToChatLog("Which different unit would you like to convert to? inches, feet, yards, miles, cm, meters, or km" );
+		gConsole.addToChatLog("Which different unit would you like to convert to? inches, feet, yards, miles, cm, meters, or km" );
 		
-		unitInputB = theClass.checkForInput();
-		unitInputB = theClass.waitForInput();//this will wait for input from the GUI
+		unitInputB = gConsole.checkForInput();
+		unitInputB = gConsole.waitForInput();//this will wait for input from the GUI
 		unitInputB.replace(" ", "");//first lets replace all spaces with empty space
 		
 		for(int i = 0; i < 7; i ++)
@@ -169,14 +169,14 @@ public class SimpleConverter extends Plugin
 			
 		}
 		 
-		theClass.addToChatLog("Enter the number of " + unitInputA + " that you want to convert ");
-		inputValue = theClass.checkForInput();
-		inputValue = theClass.waitForInput();//this will wait for input from the GUI
+		gConsole.addToChatLog("Enter the number of " + unitInputA + " that you want to convert ");
+		inputValue = gConsole.checkForInput();
+		inputValue = gConsole.waitForInput();//this will wait for input from the GUI
 		inputValue.replace(" ", "");//first lets replace all spaces with empty space
 		double output = Double.parseDouble(inputValue);
 		double answer = output * lengthChart[indexA][indexB];
 		
-		theClass.addToChatLog(inputValue + " " + unitInputA +  " = " + answer + " " + unitInputB);
+		gConsole.addToChatLog(inputValue + " " + unitInputA +  " = " + answer + " " + unitInputB);
 		
 	}
 
@@ -188,10 +188,10 @@ public class SimpleConverter extends Plugin
 		String unitInputB;
 		String inputValue;
 		
-		theClass.addToChatLog("Which unit would you like to convert from? mph, kmh, m/s, ft/s" );
+		gConsole.addToChatLog("Which unit would you like to convert from? mph, kmh, m/s, ft/s" );
 		
-		unitInputA = theClass.checkForInput();
-		unitInputA = theClass.waitForInput();//this will wait for input from the GUI
+		unitInputA = gConsole.checkForInput();
+		unitInputA = gConsole.waitForInput();//this will wait for input from the GUI
 		unitInputA.replace(" ", "");//first lets replace all spaces with empty space
 		
 		for(int i = 0; i < 4; i ++)
@@ -202,10 +202,10 @@ public class SimpleConverter extends Plugin
 			}	
 		}
 		
-		theClass.addToChatLog("Which different unit would you like to convert to? mph, kmh, m/s, ft/s" );
+		gConsole.addToChatLog("Which different unit would you like to convert to? mph, kmh, m/s, ft/s" );
 		
-		unitInputB = theClass.checkForInput();
-		unitInputB = theClass.waitForInput();//this will wait for input from the GUI
+		unitInputB = gConsole.checkForInput();
+		unitInputB = gConsole.waitForInput();//this will wait for input from the GUI
 		unitInputB.replace(" ", "");//first lets replace all spaces with empty space
 		
 		for(int i = 0; i < 4; i ++)
@@ -216,14 +216,14 @@ public class SimpleConverter extends Plugin
 			}
 		}
 		 
-		theClass.addToChatLog("Enter the number of " + unitInputA + " that you want to convert ");
-		inputValue = theClass.checkForInput();
-		inputValue = theClass.waitForInput();//this will wait for input from the GUI
+		gConsole.addToChatLog("Enter the number of " + unitInputA + " that you want to convert ");
+		inputValue = gConsole.checkForInput();
+		inputValue = gConsole.waitForInput();//this will wait for input from the GUI
 		inputValue.replace(" ", "");//first lets replace all spaces with empty space
 		double output = Double.parseDouble(inputValue);
 		double answer = output * speedChart[indexA][indexB];
 		
-		theClass.addToChatLog(inputValue + " " + unitInputA +  " = " + answer + " " + unitInputB);
+		gConsole.addToChatLog(inputValue + " " + unitInputA +  " = " + answer + " " + unitInputB);
 		
 	}
 	

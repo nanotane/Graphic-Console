@@ -1,11 +1,11 @@
 package utilityFunctions;
 
-import mainFiles.MainClass;
+import mainFiles.ConsoleGraphics;
 import mainFiles.Plugin;
 
 public class DiceCalc extends Plugin
 {
-	public DiceCalc(MainClass a)
+	public DiceCalc(ConsoleGraphics a)
 	{
 		super(a);
 		this.name = "Dice Program";
@@ -15,16 +15,16 @@ public class DiceCalc extends Plugin
 	}
 	public void rollDieStart()
 	{
-		theClass.addToChatLog("Dice Rolling program started:");
-		String theInput = theClass.checkForInput();
+		gConsole.addToChatLog("Dice Rolling program started:");
+		String theInput = gConsole.checkForInput();
 		//This is the large while loop that runs as long as the program is working
 		while(true)
 		{
 			//wait for new input
-			theClass.addToChatLog("Do you want to roll a single die or multiple?");
-			theClass.addToChatLog("enter one or multi");
+			gConsole.addToChatLog("Do you want to roll a single die or multiple?");
+			gConsole.addToChatLog("enter one or multi");
 			//This waits for new input from the user
-			theInput = theClass.waitForInput();
+			theInput = gConsole.waitForInput();
 			//Check to see if that input was the one we wanted
 			int tempProcess = -1;
 			if(theInput.equalsIgnoreCase("one"))
@@ -40,7 +40,7 @@ public class DiceCalc extends Plugin
 			}
 			else
 			{
-				theClass.addToChatLog("Please enter a valid response");
+				gConsole.addToChatLog("Please enter a valid response");
 			}
 		}
 	}
@@ -76,10 +76,10 @@ public class DiceCalc extends Plugin
 	public void throwOneDie(String theInput)
 	{
 		int tempProcess = -1;
-		theClass.addToChatLog("How many Sides does this die Have?");
+		gConsole.addToChatLog("How many Sides does this die Have?");
 		while(true)
 		{
-			theInput = theClass.waitForInput();//This will wait for input then store it in theInput when it arrives
+			theInput = gConsole.waitForInput();//This will wait for input then store it in theInput when it arrives
 			//Tries to catch an error if the user type something that wasnt a number
 			try
 			{
@@ -89,14 +89,14 @@ public class DiceCalc extends Plugin
 			}
 			catch (NumberFormatException e)
 			{
-				theClass.addToChatLog("Please type a number");
+				gConsole.addToChatLog("Please type a number");
 			}
 			
 		}
 		
 		//Roll that die!
 		String tempAnswer ="The number you rolled was: " + rollADie(tempProcess);
-		theClass.addToChatLog(tempAnswer);
+		gConsole.addToChatLog(tempAnswer);
 	}
 	/**
 	 * Simulates multiple die with a set number of sides being thrown.
@@ -106,10 +106,10 @@ public class DiceCalc extends Plugin
 		//Get the number of sides
 		int tempProcess = -1;
 		int tempProcess2 = -1;
-		theClass.addToChatLog("How many sides will each die have?");
+		gConsole.addToChatLog("How many sides will each die have?");
 		while(true)
 		{
-			theInput = theClass.waitForInput();//This will wait for input then store it in theInput when it arrives
+			theInput = gConsole.waitForInput();//This will wait for input then store it in theInput when it arrives
 			//Tries to catch an error if the user type something that wasnt a number
 			try
 			{
@@ -119,15 +119,15 @@ public class DiceCalc extends Plugin
 			}
 			catch (NumberFormatException e)
 			{
-				theClass.addToChatLog("Please type a number");
+				gConsole.addToChatLog("Please type a number");
 			}
 			
 		}
 		//Get the number of dice that we want to throw
-		theClass.addToChatLog("How many dice do you want to throw?");
+		gConsole.addToChatLog("How many dice do you want to throw?");
 		while(true)
 		{
-			theInput = theClass.waitForInput();//This will wait for input then store it in theInput when it arrives
+			theInput = gConsole.waitForInput();//This will wait for input then store it in theInput when it arrives
 			//Tries to catch an error if the user type something that wasnt a number
 			try
 			{
@@ -137,7 +137,7 @@ public class DiceCalc extends Plugin
 			}
 			catch (NumberFormatException e)
 			{
-				theClass.addToChatLog("Please type a number");
+				gConsole.addToChatLog("Please type a number");
 			}
 			
 		}
@@ -146,10 +146,10 @@ public class DiceCalc extends Plugin
 		for(int i = 0; i < tempAnswers.length-1; i++)
 		{
 			String tempString = "Die number " + (i +1) + ": " + tempAnswers[i];
-			theClass.addToChatLog(tempString);
+			gConsole.addToChatLog(tempString);
 		}
 		String tempString2 = "Total of all die thrown: " + tempAnswers[tempAnswers.length-1];
-		theClass.addToChatLog(tempString2);
+		gConsole.addToChatLog(tempString2);
 		
 		
 		

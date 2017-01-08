@@ -20,7 +20,7 @@ public class PluginLoader {
 	 * ADD NEW PROGRAMS TO THIS LIST
 	 * @return an array list of all new programs
 	 */
-	public ArrayList<Plugin> createAll(MainClass theClass)
+	public ArrayList<Plugin> createAll(ConsoleGraphics theClass)
 	{
 		ArrayList<Plugin> programList = new ArrayList<Plugin>();
 		programList.add(new ResistorCalc(theClass));

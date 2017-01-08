@@ -28,7 +28,7 @@ import javax.swing.border.Border;
  * @version 0.6.2
  *
  */
-public class MainClass extends JFrame
+public class ConsoleGraphics extends JFrame
 {
 	public String version = "0.7.0";
 	private static final long serialVersionUID = 89L;
@@ -66,7 +66,7 @@ public class MainClass extends JFrame
 	 * This constructor will draw the console and run the initilizing functions.
 	 * Then it will run the command thread 
 	 */
-	public MainClass()
+	public ConsoleGraphics()
 	{
 		this.getSettings();
 		this.setSize(MAX_X, MAX_Y);
@@ -423,6 +423,6 @@ public class MainClass extends JFrame
 	//Main method
 	public static void main(String args[])
 	{
-		MainClass test = new MainClass();
+		ConsoleGraphics test = new ConsoleGraphics();
 	}
 }

@@ -2,7 +2,7 @@ package mainFiles;
 
 public class Plugin implements RunCommand
 {
-	protected MainClass theClass;
+	protected ConsoleGraphics gConsole;
 	public String description = "";
 	public String version = "";
 	public String author = "";
@@ -10,9 +10,9 @@ public class Plugin implements RunCommand
 	public String command = "";
 	public boolean runAtStart = false;//this determines if the program will automatically run at start
 	
-	public Plugin(MainClass a)
+	public Plugin(ConsoleGraphics a)
 	{
-		theClass = a;
+		gConsole = a;
 	}
 	
 	/**

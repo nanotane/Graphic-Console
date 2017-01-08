@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import mainFiles.MainClass;
+import mainFiles.ConsoleGraphics;
 import mainFiles.Plugin;
 /**
  * 
@@ -14,7 +14,7 @@ import mainFiles.Plugin;
  */
 public class StringBinaryConverter extends Plugin
 {
-	public StringBinaryConverter(MainClass a)
+	public StringBinaryConverter(ConsoleGraphics a)
 	{
 		super(a);
 		this.name = "String to Binary Converter";
@@ -33,12 +33,12 @@ public class StringBinaryConverter extends Plugin
 		boolean flagExit = true;
 		while (flagExit) {
 			// Menu
-			theClass.addToChatLog("What do you want to do?");
-			theClass.addToChatLog("1 Encrypt a string into binary.");
-			theClass.addToChatLog("2 Decrypt binary into a string.");
-			theClass.addToChatLog("3 Exit.");
-			theClass.addToChatLogsl("~ ");
-			String decision = theClass.waitForInput();
+			gConsole.addToChatLog("What do you want to do?");
+			gConsole.addToChatLog("1 Encrypt a string into binary.");
+			gConsole.addToChatLog("2 Decrypt binary into a string.");
+			gConsole.addToChatLog("3 Exit.");
+			gConsole.addToChatLogsl("~ ");
+			String decision = gConsole.waitForInput();
 
 			// Encryption
 			if (decision.equalsIgnoreCase("1")) {
@@ -46,12 +46,12 @@ public class StringBinaryConverter extends Plugin
 				int symbolArray[] = { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
 						42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
 						56, 57, 58, 59, 60, 61, 62, 63 };
-				theClass.addToChatLog("Enter a string you want to encrypt.");
-				theClass.addToChatLogsl("~ ");
-				String encryptInput = theClass.waitForInput();
+				gConsole.addToChatLog("Enter a string you want to encrypt.");
+				gConsole.addToChatLogsl("~ ");
+				String encryptInput = gConsole.waitForInput();
 				int[] encryptArray = new int[encryptInput.length()];
 				Thread.sleep(500);
-				theClass.addToChatLogsl("Your string in binary is: ");
+				gConsole.addToChatLogsl("Your string in binary is: ");
 				boolean flagEncrypt = true;
 				for (int e = 0; e < encryptInput.length(); e++) {
 					flagEncrypt = true;
@@ -59,21 +59,21 @@ public class StringBinaryConverter extends Plugin
 
 					for (int i = 0; i < 32; i++) {
 						if (encryptArray[e] == symbolArray[i]) {
-							theClass.addToChatLogsl("0"
+							gConsole.addToChatLogsl("0"
 									+ Integer.toBinaryString(symbolArray[i]));
 							flagEncrypt = false;
 						}
 					}
 					if (flagEncrypt)
-						theClass.addToChatLogsl(Integer
+						gConsole.addToChatLogsl(Integer
 								.toBinaryString(encryptArray[e]));
 				}
 
 				// Printing to Text File
-				theClass.addToChatLog("");
-				theClass.addToChatLog("Would you like to save this binary string as a text file? [Y/N]");
-				theClass.addToChatLogsl("~ ");
-				String txtDecision = theClass.waitForInput();
+				gConsole.addToChatLog("");
+				gConsole.addToChatLog("Would you like to save this binary string as a text file? [Y/N]");
+				gConsole.addToChatLogsl("~ ");
+				String txtDecision = gConsole.waitForInput();
 
 				if (txtDecision.equalsIgnoreCase("Y")
 						|| txtDecision.equalsIgnoreCase("Yes")) {
@@ -95,7 +95,7 @@ public class StringBinaryConverter extends Plugin
 					}
 					fw.close();
 					pw.close();
-					theClass.addToChatLog("Your string has been saved as BinaryString.txt");
+					gConsole.addToChatLog("Your string has been saved as BinaryString.txt");
 				} else if (txtDecision.equalsIgnoreCase("N")
 						|| txtDecision.equalsIgnoreCase("No"))
 					Thread.sleep(500);
@@ -106,19 +106,19 @@ public class StringBinaryConverter extends Plugin
 			// Decryption
 			else if (decision.equalsIgnoreCase("2")) {
 				Thread.sleep(500);
-				theClass.addToChatLog("Enter a string of binary that you want to decrypt.");
-				theClass.addToChatLogsl("~ ");
-				String decryptInput = theClass.waitForInput();
+				gConsole.addToChatLog("Enter a string of binary that you want to decrypt.");
+				gConsole.addToChatLogsl("~ ");
+				String decryptInput = gConsole.waitForInput();
 				boolean flagCatch = true;
 				if (decryptInput.length() % 7 == 0) {
 					Thread.sleep(500);
-					theClass.addToChatLogsl("Your string is: ");
+					gConsole.addToChatLogsl("Your string is: ");
 					for (int d = 0; d < decryptInput.length(); d += 7) {
 						try {
 							String decryptSub = decryptInput
 									.substring(d, d + 7);
 							int decryptDec = Integer.parseInt(decryptSub, 2);
-							theClass.addToChatLogsl(((char) decryptDec) + "");
+							gConsole.addToChatLogsl(((char) decryptDec) + "");
 						} catch (NumberFormatException e) {
 							flagCatch = false;
 							d = decryptInput.length();
@@ -126,14 +126,14 @@ public class StringBinaryConverter extends Plugin
 
 					}
 					if (flagCatch == false) {
-						theClass.addToChatLog("ERROR");
-						theClass.addToChatLogsl("You entered a normal string instead of a binary string.");
+						gConsole.addToChatLog("ERROR");
+						gConsole.addToChatLogsl("You entered a normal string instead of a binary string.");
 					}
 				} else {
-					theClass.addToChatLog("Your binary string isn't divisible by 7! Please recheck your binary.");
+					gConsole.addToChatLog("Your binary string isn't divisible by 7! Please recheck your binary.");
 					Thread.sleep(500);
 				}
-				theClass.addToChatLog("");
+				gConsole.addToChatLog("");
 			}
 
 			// Exit
@@ -143,7 +143,7 @@ public class StringBinaryConverter extends Plugin
 
 			// Error
 			else {
-				theClass.addToChatLog("Silly duck. Try again.");
+				gConsole.addToChatLog("Silly duck. Try again.");
 				Thread.sleep(500);
 			}
 		}
@@ -157,8 +157,8 @@ public class StringBinaryConverter extends Plugin
 		} catch (IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			theClass.addToChatLog("SBCONVERTER HAS CRASHED");
-			theClass.addToChatLog("IO EXCEPTION");
+			gConsole.addToChatLog("SBCONVERTER HAS CRASHED");
+			gConsole.addToChatLog("IO EXCEPTION");
 		}
 	}
 }

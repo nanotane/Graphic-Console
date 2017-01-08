@@ -1,13 +1,13 @@
 package calculatingFunctions;
 
-import mainFiles.MainClass;
+import mainFiles.ConsoleGraphics;
 import mainFiles.Plugin;
 
 public class ResistorCalc extends Plugin
 {
 	//Constructor
 
-	public ResistorCalc(MainClass a)
+	public ResistorCalc(ConsoleGraphics a)
 	{
 		super(a);
 		this.author = "Ian Davila";
@@ -23,19 +23,19 @@ public class ResistorCalc extends Plugin
 		double multiplerVal;
 		double toleranceVal;
 		double totalOhms;
-		String theInput = theClass.checkForInput();
-		theClass.addToChatLog("New Resistor Calculation");
+		String theInput = gConsole.checkForInput();
+		gConsole.addToChatLog("New Resistor Calculation");
 		while(true)
 		{
 
 
-			theClass.addToChatLog("Type in the color of the first band");
+			gConsole.addToChatLog("Type in the color of the first band");
 			//This loop keeps asking for input until a correct value is put in
 			while(true)
 			{//wait for new input
 				while(true)
 				{
-					theInput = theClass.checkForInput();
+					theInput = gConsole.checkForInput();
 					if(theInput.equalsIgnoreCase("#$%NO%$#"))
 					{
 
@@ -49,7 +49,7 @@ public class ResistorCalc extends Plugin
 				digit1 = colorValue(theInput, false);
 				if(digit1 ==  -1)
 				{
-					theClass.addToChatLog("Please input a correct color");
+					gConsole.addToChatLog("Please input a correct color");
 				}
 				else
 				{
@@ -58,13 +58,13 @@ public class ResistorCalc extends Plugin
 			}
 
 
-			theClass.addToChatLog("Type in the color of the second band");
+			gConsole.addToChatLog("Type in the color of the second band");
 			while(true)
 			{
 				//wait for new input
 				while(true)
 				{
-					theInput = theClass.checkForInput();
+					theInput = gConsole.checkForInput();
 					if(theInput.equalsIgnoreCase("#$%NO%$#"))
 					{
 
@@ -77,7 +77,7 @@ public class ResistorCalc extends Plugin
 				digit2 = colorValue(theInput, false);
 				if(digit2 ==  -1)
 				{
-					theClass.addToChatLog("Please input a correct color");
+					gConsole.addToChatLog("Please input a correct color");
 				}
 				else
 				{
@@ -86,13 +86,13 @@ public class ResistorCalc extends Plugin
 			}
 
 
-			theClass.addToChatLog("Type in the color of the third band");
+			gConsole.addToChatLog("Type in the color of the third band");
 			while(true)
 			{
 				//wait for new input
 				while(true)
 				{
-					theInput = theClass.checkForInput();
+					theInput = gConsole.checkForInput();
 					if(theInput.equalsIgnoreCase("#$%NO%$#"))
 					{
 
@@ -105,7 +105,7 @@ public class ResistorCalc extends Plugin
 				multiplerVal = colorValue(theInput, true);
 				if(multiplerVal ==  -1)
 				{
-					theClass.addToChatLog("Please input a correct color");
+					gConsole.addToChatLog("Please input a correct color");
 				}
 				else
 				{
@@ -113,13 +113,13 @@ public class ResistorCalc extends Plugin
 				}
 			}
 
-			theClass.addToChatLog("Type in the color of the fourth band");
+			gConsole.addToChatLog("Type in the color of the fourth band");
 			while(true)
 			{
 				//wait for new input
 				while(true)
 				{
-					theInput = theClass.checkForInput();
+					theInput = gConsole.checkForInput();
 					if(theInput.equalsIgnoreCase("#$%NO%$#"))
 					{
 
@@ -132,7 +132,7 @@ public class ResistorCalc extends Plugin
 				toleranceVal = colorValue(theInput, false);
 				if(toleranceVal ==  -1)
 				{
-					theClass.addToChatLog("Please input a correct color");
+					gConsole.addToChatLog("Please input a correct color");
 				}
 				else
 				{
@@ -142,10 +142,10 @@ public class ResistorCalc extends Plugin
 			//Calculating the ohms value
 			totalOhms = ((digit1 * 10) + digit2)*multiplerVal;
 			String finalAnswer = "" + totalOhms + " +/- " + toleranceVal + "%";
-			theClass.addToChatLog("Resistance is:");
-			theClass.addToChatLog(finalAnswer);
-			theClass.addToChatLog("Do you want to type another calculation?");
-			theInput = theClass.waitForInput();
+			gConsole.addToChatLog("Resistance is:");
+			gConsole.addToChatLog(finalAnswer);
+			gConsole.addToChatLog("Do you want to type another calculation?");
+			theInput = gConsole.waitForInput();
 			if(!theInput.equalsIgnoreCase("yes"))
 			{
 				break;
@@ -309,7 +309,7 @@ public class ResistorCalc extends Plugin
 
 	public void processInput()
 	{
-		String theInput = theClass.checkForInput();
+		String theInput = gConsole.checkForInput();
 		//if we have not received new input
 		while(theInput.equalsIgnoreCase("#$%NO%$#"))
 		{

@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class ReadWrite
 {
 
-	private MainClass theClass;
-	public ReadWrite(MainClass a)
+	private ConsoleGraphics theClass;
+	public ReadWrite(ConsoleGraphics a)
 	{
 		theClass = a;
 	}

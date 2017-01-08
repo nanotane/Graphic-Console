@@ -1,11 +1,11 @@
 package calculatingFunctions;
 
-import mainFiles.MainClass;
+import mainFiles.ConsoleGraphics;
 
 public class ElectricsCalculator 
 {
-	private MainClass theClass;
-	public ElectricsCalculator(MainClass a)
+	private ConsoleGraphics theClass;
+	public ElectricsCalculator(ConsoleGraphics a)
 	{
 		theClass = a;
 	}

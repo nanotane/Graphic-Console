@@ -14,7 +14,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-import mainFiles.MainClass;
+import mainFiles.ConsoleGraphics;
 import mainFiles.Plugin;
 
 public class RogueTraderStats extends Plugin{
@@ -25,7 +25,7 @@ public class RogueTraderStats extends Plugin{
 	public Stack<RTFO> rtfoStack = new Stack();
 	public String fileName = "RogueTrader.txt";
 	public String[] symbols = {"@", "#"};
-	public RogueTraderStats(MainClass a) {
+	public RogueTraderStats(ConsoleGraphics a) {
 		super(a);
 		this.name = "Rogue trader program";
 		this.command = "/rtf";
@@ -35,9 +35,9 @@ public class RogueTraderStats extends Plugin{
 
 	public void RogueTraderStart()
 	{
-		theClass.setFontSize(18);
-		theClass.addToChatLog("Rogue trader file system", "~~", true);
-		theClass.addToChatLog("");
+		gConsole.setFontSize(18);
+		gConsole.addToChatLog("Rogue trader file system", "~~", true);
+		gConsole.addToChatLog("");
 		selectionMenu();
 	}
 	/**
@@ -46,17 +46,17 @@ public class RogueTraderStats extends Plugin{
 	 */
 	public void rtfsHelp()
 	{
-		theClass.addToChatLog("Navigating", "~", true);
-		theClass.addToChatLog("Type the number of the folder you want to go into and hit enter.");
-		theClass.addToChatLog("Type b and hit enter to go back to the previous folder.");
-		theClass.addToChatLog("Use the following commands to manipulate the folders.");
-		theClass.addToChatLog("Command list", "~", true);
-		theClass.addToChatLog("n -- make a new folder");
-		theClass.addToChatLog("e# -- edit a folder, where '#' is the folder you want to edit");
-		theClass.addToChatLog("d# -- delete a folder, where # is the folder you want to delete");
-		theClass.addToChatLog("w -- This will allow you to write for multiple lines. Use -s to finish writing");
-		theClass.addToChatLog("s -- This will save all changes made so far");
-		theClass.addToChatLog("q -- This will quit the plugin");
+		gConsole.addToChatLog("Navigating", "~", true);
+		gConsole.addToChatLog("Type the number of the folder you want to go into and hit enter.");
+		gConsole.addToChatLog("Type b and hit enter to go back to the previous folder.");
+		gConsole.addToChatLog("Use the following commands to manipulate the folders.");
+		gConsole.addToChatLog("Command list", "~", true);
+		gConsole.addToChatLog("n -- make a new folder");
+		gConsole.addToChatLog("e# -- edit a folder, where '#' is the folder you want to edit");
+		gConsole.addToChatLog("d# -- delete a folder, where # is the folder you want to delete");
+		gConsole.addToChatLog("w -- This will allow you to write for multiple lines. Use -s to finish writing");
+		gConsole.addToChatLog("s -- This will save all changes made so far");
+		gConsole.addToChatLog("q -- This will quit the plugin");
 	}
 	/**
 	 * This will allow the user to continue writing after they hit enter, 
@@ -77,7 +77,7 @@ public class RogueTraderStats extends Plugin{
 		 * if so then we will do nothing.
 		 * 
 		 */
-		theClass.addToChatLog("Writing...", "-", false);
+		gConsole.addToChatLog("Writing...", "-", false);
 		String input;
 		Queue<String> writingQ = new LinkedList<String>();
 		//lets make sure its a # folder
@@ -87,7 +87,7 @@ public class RogueTraderStats extends Plugin{
 		}
 		while(true)
 		{
-			input = theClass.waitForInput();
+			input = gConsole.waitForInput();
 			//now lets check
 			if(input.equalsIgnoreCase("-s"))
 			{
@@ -116,9 +116,9 @@ public class RogueTraderStats extends Plugin{
 	 */
 	public void editRTFO(RTFO toEdit)
 	{
-		theClass.addToChatLog("Type in new info and hit enter", "~", true);
-		theClass.setInputField(toEdit.contents.substring(1));
-		String input = theClass.waitForInput();
+		gConsole.addToChatLog("Type in new info and hit enter", "~", true);
+		gConsole.setInputField(toEdit.contents.substring(1));
+		String input = gConsole.waitForInput();
 		String symbolTemp = toEdit.contents.substring(0, 1);
 		for(String sym: symbols)//check and see if the symbol is a symbol we are working with
 		{
@@ -136,7 +136,7 @@ public class RogueTraderStats extends Plugin{
 	public void deleteRTFO(RTFO root, int toDelete)
 	{
 		root.sub.remove(toDelete);
-		theClass.addToChatLog("RTFO deleted", "~", true);
+		gConsole.addToChatLog("RTFO deleted", "~", true);
 	}
 	/**
 	 * This will create a new RTFO
@@ -145,8 +145,8 @@ public class RogueTraderStats extends Plugin{
 	 */
 	public RTFO createRTFO(RTFO root)
 	{
-		theClass.addToChatLog("Type in the name of the folder", "~", true);
-		String input = theClass.waitForInput();
+		gConsole.addToChatLog("Type in the name of the folder", "~", true);
+		String input = gConsole.waitForInput();
 		String newSym = "";
 		RTFO newRTFO = new RTFO();
 		//for making a new @
@@ -290,13 +290,13 @@ public class RogueTraderStats extends Plugin{
 			bufferedReader.close();         
 		}
 		catch(FileNotFoundException ex) {
-			theClass.addToChatLog(
+			gConsole.addToChatLog(
 					"Unable to open file:" + fileName);    
-			theClass.addToChatLog("Creating basic file....");
+			gConsole.addToChatLog("Creating basic file....");
 			makeDefaultFile();
 			readRTFile(root);
 		} catch (IOException e) {
-			theClass.addToChatLog("IO Exception ocurred");
+			gConsole.addToChatLog("IO Exception ocurred");
 			e.printStackTrace();
 		}
 		return root;
@@ -367,10 +367,10 @@ public class RogueTraderStats extends Plugin{
 			{
 				for(int i = 0; i < pointer.sub.size(); i++)//for @ entries
 				{
-					theClass.addToChatLog(i + " " +pointer.sub.get(i).contents, "*", false);
+					gConsole.addToChatLog(i + " " +pointer.sub.get(i).contents, "*", false);
 				}
 
-				String input = theClass.waitForInput().replaceAll(" ", "");//we will also remove all spaces
+				String input = gConsole.waitForInput().replaceAll(" ", "");//we will also remove all spaces
 
 				if(input.equalsIgnoreCase("b"))//if they want to go back
 				{
@@ -378,7 +378,7 @@ public class RogueTraderStats extends Plugin{
 					{
 						pointer =  rtfoStack.pop();//then lets pop the stack and set the pointer to what we popped
 					}
-					theClass.clearChatLog();
+					gConsole.clearChatLog();
 				}
 				else if(input.equalsIgnoreCase("q"))//if we are quiting
 				{
@@ -402,7 +402,7 @@ public class RogueTraderStats extends Plugin{
 				}
 				else if(input.equalsIgnoreCase("s"))
 				{
-					theClass.addToChatLog("Saved", "~", true);
+					gConsole.addToChatLog("Saved", "~", true);
 					saveRTFO(root);
 				}
 				else if(input.contains("d") || input.contains("D") )
@@ -427,7 +427,7 @@ public class RogueTraderStats extends Plugin{
 				}
 				else if(input == null || input.equals("") || Integer.parseInt(input) > pointer.sub.size()-1 || Integer.parseInt(input) < 0)
 				{
-					theClass.addToChatLog("out of bounds or null");
+					gConsole.addToChatLog("out of bounds or null");
 				}
 				else//if not then lets see what they wanted
 				{
@@ -442,8 +442,8 @@ public class RogueTraderStats extends Plugin{
 								{
 									RTFO temp = pointer;
 									rtfoStack.push(temp);
-									theClass.clearChatLog();// Lets clear chat so things look neater
-									theClass.addToChatLog(i + " " + pointer.sub.get(i).contents, "--", true);
+									gConsole.clearChatLog();// Lets clear chat so things look neater
+									gConsole.addToChatLog(i + " " + pointer.sub.get(i).contents, "--", true);
 									pointer = pointer.sub.get(i);
 									selectionLoopFlag = false;
 									break selectionLoop;
@@ -452,13 +452,13 @@ public class RogueTraderStats extends Plugin{
 					}
 				}
 			}
-		theClass.addToChatLog("Exiting rogue trader program", "~~", true);
+		gConsole.addToChatLog("Exiting rogue trader program", "~~", true);
 	}
 	
 	@Override
 	public void run()
 	{
 		RogueTraderStart();
-		theClass.setFontSize(12);
+		gConsole.setFontSize(12);
 	}
 }

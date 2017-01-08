@@ -1,5 +1,5 @@
 package gameFunctions.id2013;
-import mainFiles.MainClass;
+import mainFiles.ConsoleGraphics;
 import mainFiles.Plugin;
 /**
  * 
@@ -23,7 +23,7 @@ public class TicTacToeGame extends Plugin {
 	public   boolean flag = true;
 	public   String turn = "x";
 
-	public TicTacToeGame(MainClass a)
+	public TicTacToeGame(ConsoleGraphics a)
 	{
 		super(a);
 		this.name = "Tic tac toe game";
@@ -45,7 +45,7 @@ public class TicTacToeGame extends Plugin {
 				&& place8 != 's'
 				&& place9 != 's')
 		{
-			theClass.addToChatLog("It's a draw! Would you like to play again? If so, click run. The creator of this game was Joseph Canales.");
+			gConsole.addToChatLog("It's a draw! Would you like to play again? If so, click run. The creator of this game was Joseph Canales.");
 			r = true;
 		}
 		return r;
@@ -98,23 +98,23 @@ public class TicTacToeGame extends Plugin {
 	}
 	public void board()
 	{
-		theClass.addToChatLog("~~>"+place1 + "|" + place2 + "|" + place3);
-		theClass.addToChatLog("~~>" +place4 + "|" + place5 + "|" + place6);
-		theClass.addToChatLog("~~>"+place7 + "|" + place8 + "|" + place9);
+		gConsole.addToChatLog("~~>"+place1 + "|" + place2 + "|" + place3);
+		gConsole.addToChatLog("~~>" +place4 + "|" + place5 + "|" + place6);
+		gConsole.addToChatLog("~~>"+place7 + "|" + place8 + "|" + place9);
 	}
 	public void runTicTacToe() {
 		// TODO Auto-generated method stub
 		//Scanner kbinput = new Scanner(System.in);	
 		String a = ("Welcome to Tic-Tac-Toe!");
-		theClass.addToChatLog(a);
+		gConsole.addToChatLog(a);
 		//		theClass.addToChatLog("What would you like to play x or o?");
 		while(flag)
 		{
 			turn = "x";
 			while(true)
 			{
-				theClass.addToChatLog("Player 1 turn");
-				String TicTac = theClass.waitForInput();
+				gConsole.addToChatLog("Player 1 turn");
+				String TicTac = gConsole.waitForInput();
 				//This section decides were player 1's x goes
 				if(TicTac.equalsIgnoreCase("1") && place1 != 'o' && place1 != 'x')
 				{
@@ -161,13 +161,13 @@ public class TicTacToeGame extends Plugin {
 					place9 = 'x';
 					break;
 				}
-				theClass.addToChatLog("Oops, try again.");
+				gConsole.addToChatLog("Oops, try again.");
 				board();
 			}
 			board();
 			if(check())
 			{
-				theClass.addToChatLog("Good game! Player 1 wins. Would you like to play again? If so, click run. The creator of this game was Joseph Canales.");
+				gConsole.addToChatLog("Good game! Player 1 wins. Would you like to play again? If so, click run. The creator of this game was Joseph Canales.");
 				break;
 			}
 			if(checkDraw())
@@ -178,8 +178,8 @@ public class TicTacToeGame extends Plugin {
 			turn = "o";
 			while(true)
 			{
-				theClass.addToChatLog("Player 2 turn");
-				String TicTacToe = theClass.waitForInput();
+				gConsole.addToChatLog("Player 2 turn");
+				String TicTacToe = gConsole.waitForInput();
 				if(TicTacToe.equalsIgnoreCase("1") && place1 != 'x' && place1 != 'o')
 				{
 					place1 = 'o';
@@ -226,13 +226,13 @@ public class TicTacToeGame extends Plugin {
 					place9 = 'o';
 					break;
 				}
-				theClass.addToChatLog("Oops, try again");
+				gConsole.addToChatLog("Oops, try again");
 				board();
 			}
 			board();
 			if(check())
 			{
-				theClass.addToChatLog("Good game! Player 2 wins. Would you like to play again? If so, click run. The creator of this game was Joseph Canales.");
+				gConsole.addToChatLog("Good game! Player 2 wins. Would you like to play again? If so, click run. The creator of this game was Joseph Canales.");
 				break;	
 			}
 			if(checkDraw())

@@ -1,11 +1,11 @@
 package gameFunctions;
 
-import mainFiles.MainClass;
+import mainFiles.ConsoleGraphics;
 
 public class SudokuGame 
 {
-	private MainClass theClass;
-	public SudokuGame(MainClass a)
+	private ConsoleGraphics theClass;
+	public SudokuGame(ConsoleGraphics a)
 	{
 		theClass = a;
 	}
