@@ -323,11 +323,17 @@ public class ConsoleGraphics extends JFrame
 		//if we got here thats because no fonts matched so return false
 		return false;
 	}
+	
 	public boolean setFontSize(int newFontSize)
 	{
 		chatLog.setFont(new Font(font.getName(), font.PLAIN, newFontSize));
 		//if we got here thats because no fonts matched so return false
 		return false;
+	}
+	
+	public int getFontSize()
+	{
+		return font.getSize();
 	}
 	/**
 	 * Prints out all of the fonts available 

@@ -307,25 +307,7 @@ public class RogueTraderStats extends Plugin{
 	 */
 	public void makeDefaultFile()
 	{
-		FileWriter fw = null;
-		try {
-			fw = new FileWriter(fileName);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		PrintWriter pw = new PrintWriter(fw, true);
-		pw.println("@folder1");
-		pw.println(";");
-		pw.println("@folder2");
-		pw.println(";");
-		pw.println("@folder3");
-		pw.println(";");
-		try {
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		pw.close();
+		makeNewFile(fileName);
 	}
 	
 	/**
@@ -367,7 +349,7 @@ public class RogueTraderStats extends Plugin{
 			{
 				for(int i = 0; i < pointer.sub.size(); i++)//for @ entries
 				{
-					gConsole.addToChatLog(i + " " +pointer.sub.get(i).contents, "*", false);
+					gConsole.addToChatLog(i + " " +pointer.sub.get(i).contents, "-", false);
 				}
 
 				String input = gConsole.waitForInput().replaceAll(" ", "");//we will also remove all spaces
@@ -380,7 +362,7 @@ public class RogueTraderStats extends Plugin{
 					}
 					gConsole.clearChatLog();
 				}
-				else if(input.equalsIgnoreCase("q"))//if we are quiting
+				else if(input.equalsIgnoreCase("q"))//if we are quitting
 				{
 					break mainLoop;
 				}
@@ -443,7 +425,7 @@ public class RogueTraderStats extends Plugin{
 									RTFO temp = pointer;
 									rtfoStack.push(temp);
 									gConsole.clearChatLog();// Lets clear chat so things look neater
-									gConsole.addToChatLog(i + " " + pointer.sub.get(i).contents, "--", true);
+									gConsole.addToChatLog(i + " " + pointer.sub.get(i).contents, "---", true);
 									pointer = pointer.sub.get(i);
 									selectionLoopFlag = false;
 									break selectionLoop;
@@ -452,13 +434,12 @@ public class RogueTraderStats extends Plugin{
 					}
 				}
 			}
-		gConsole.addToChatLog("Exiting rogue trader program", "~~", true);
 	}
 	
 	@Override
 	public void run()
 	{
 		RogueTraderStart();
-		gConsole.setFontSize(12);
+		gConsole.setFontSize(gConsole.getFontSize());
 	}
 }
