@@ -30,7 +30,7 @@ import javax.swing.border.Border;
  */
 public class MainClass extends JFrame
 {
-	public String version = "0.6.1";
+	public String version = "0.7.0";
 	private static final long serialVersionUID = 89L;
 	protected final int MAX_X = 620;
 	protected final int MAX_Y = 700;
@@ -71,7 +71,7 @@ public class MainClass extends JFrame
 		this.getSettings();
 		this.setSize(MAX_X, MAX_Y);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setTitle(name_JPane_Title);
 		this.setVisible(true);
 		this.setBackground(backgroundColor);
