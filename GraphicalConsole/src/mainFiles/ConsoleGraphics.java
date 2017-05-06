@@ -25,7 +25,7 @@ import javax.swing.border.Border;
 
 /**
  * @author Ian Davila
- * @version 0.6.2
+ * @version 0.7.0
  *
  */
 public class ConsoleGraphics extends JFrame
