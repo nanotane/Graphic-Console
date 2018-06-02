@@ -191,7 +191,7 @@ public class ConsoleGraphics extends JFrame
 			return "#$%NO%$#";//#$%NO%$# is used as a special string to indicate that we do not have new information
 	}
 	/**
-	 * Adds somethings to the chat lof
+	 * Adds somethings to the chat log
 	 * @param stuff Strings you want to add to the screen
 	 */
 	public void addToChatLog(String stuff)
@@ -404,12 +404,21 @@ public class ConsoleGraphics extends JFrame
 	/**
 	 * Save the settings given
 	 */
-	public void setSettings(String fileName, ArrayList<String>contents)
+	public void setSettings(ArrayList<String> contents)
 	{
-		fileManager.writeAll(fileName, contents);
+		fileManager.writeAll(settingsFile, contents);
 	}
 	
-
+	public void createErrorLog(Exception pException)
+	{
+		StackTraceElement[] trace = pException.getStackTrace();
+		ArrayList<String> toPrint = new ArrayList<>();
+		for(int i = 0; i < trace.length ; i++)
+		{
+			toPrint.add(trace[i].toString());
+		}
+		fileManager.writeAll("ERROR_LOG.txt", toPrint);
+	}
 	
 	public String getSettingsFileName()
 	{

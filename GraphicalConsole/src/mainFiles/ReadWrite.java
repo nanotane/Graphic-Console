@@ -76,7 +76,6 @@ public class ReadWrite
                 "Unable to open file '" + 
                 fileName + "'");                
         } catch (IOException e) {
-			// TODO Auto-generated catch block
         	theClass.addToChatLog("IO Exception ocurred");
 			e.printStackTrace();
 		}

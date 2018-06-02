@@ -1,6 +1,6 @@
 package mainFiles;
 
-public class Plugin implements RunCommand
+public class Plugin implements IRunCommand
 {
 	protected ConsoleGraphics gConsole;
 	public String description = "";

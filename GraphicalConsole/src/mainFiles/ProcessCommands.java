@@ -114,7 +114,17 @@ public class ProcessCommands implements Runnable {
 					if(theInput.equals(programList.get(i).command))//if the program is equal to one of the programs...
 					{
 						theClass.addToChatLog("-------------------------------");
-						programList.get(i).run();//lets run the program
+						try
+						{
+							programList.get(i).run();//lets run the program
+						} 
+						catch (Exception exc)
+						{
+							theClass.addToChatLog("PROGRAM HAS CRASHED!");
+							theClass.addToChatLog("Error type = " + exc.getCause().toString());
+							theClass.addToChatLog("Check the error log file for the stack trace");
+							theClass.createErrorLog(exc);
+						}
 						theClass.addToChatLog("-------------------------------");
 					}
 				}
@@ -128,7 +138,6 @@ public class ProcessCommands implements Runnable {
 	{
 		String input;
 		ArrayList<String> contents = new ArrayList<String>(); 
-				String fileName = theClass.getSettingsFileName();
 		Color newColorF;
 		Color newColorB;
 		//lets grab the old colors
@@ -170,7 +179,7 @@ public class ProcessCommands implements Runnable {
 			{
 				theClass.addToChatLog("~Colors Changed~");
 				
-				theClass.setSettings(fileName, contents);
+				theClass.setSettings(contents);
 				break;
 			}
 			else

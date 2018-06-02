@@ -1,6 +1,6 @@
 package mainFiles;
 
-public interface RunCommand 
+public interface IRunCommand 
 {
 	public void run();
 }
