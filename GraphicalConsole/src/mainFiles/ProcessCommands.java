@@ -23,7 +23,6 @@ public class ProcessCommands implements Runnable {
 		//this will load all of the programs and return them in the programlist
 		programList = loader.createAll(theClass);
 		fileRW = new ReadWrite(a);
-		
 	}
 
 
@@ -178,7 +177,8 @@ public class ProcessCommands implements Runnable {
 			if(input.equalsIgnoreCase("y"))
 			{
 				theClass.addToChatLog("~Colors Changed~");
-				
+				contents.add(theClass.getFont().getFontName());
+				contents.add(Integer.toString(theClass.getFont().getSize()));
 				theClass.setSettings(contents);
 				break;
 			}
@@ -245,6 +245,7 @@ public class ProcessCommands implements Runnable {
 			else if(input.equals("save"))//save the current font
 			{
 				theClass.addToChatLog("~Font change Saved~");
+				theClass.generateNewSettingsfile();
 				break;//now lets exit the loop
 			}
 			else if(input.equals("revert"))//revert to the original font

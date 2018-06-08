@@ -113,8 +113,9 @@ public class ReadWrite
         	if(theClass.chatLog != null)
         	{
         		 theClass.addToChatLog(
-        	                "Unable to open file '" + 
-        	                fileName + "'");
+        	                "Settings file '" + 
+        	                fileName + "' not found. Generating a new one");
+        		 theClass.generateNewSettingsfile();
         	}
             return null;
         } catch (IOException e) {

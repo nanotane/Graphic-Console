@@ -42,6 +42,7 @@ public class ConsoleGraphics extends JFrame
 	protected JScrollPane scrollypolly;
 	protected String lastUserInput;
 	protected boolean newInput = false;
+	protected boolean loadSettingsSuccessfull = false;
 	
 	//This is a special string that indicates that we do not have new input
 	protected String noInputString = "#$%NO%$#";//This is a weird sequence of characters so that way we know a user didnt type it
@@ -68,18 +69,20 @@ public class ConsoleGraphics extends JFrame
 	 */
 	public ConsoleGraphics()
 	{
-		this.getSettings();
-		this.setSize(MAX_X, MAX_Y);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(true);
-		this.setTitle(name_JPane_Title);
-		this.setVisible(true);
-		this.setBackground(backgroundColor);
-		//This is used when the user presses the enter key to grab input
 		
+		setSize(MAX_X, MAX_Y);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(true);
+		setTitle(name_JPane_Title);
+		setVisible(true);
 		//setting up the fields that will be used to declare the other JComponents
 		initComponents();
 		initComponentFunctions();
+		if(!loadSettingsSuccessfull)
+		{
+			addToChatLog("THERE WAS A PROBLEM READING FROM CONFIG FILE");
+			addToChatLog("Default Settings will be used instead");
+		}
 		commandThread.start();
 	}
 
@@ -90,17 +93,12 @@ public class ConsoleGraphics extends JFrame
 	{
 
 		lowerPanel = new JPanel();
-		lowerPanel.setBackground(backgroundColor);
+		lowerPanel.setLayout(new GridLayout(2,0, 0, 5));//Contains the lowerPanelbuttons and the inputmessage
 		sendInputButton = new JButton(name_Button1);
-		
 		Border empty = BorderFactory.createEmptyBorder();//This is used to create an empty border for the gui
-		
 		messageInput = new JTextField(30);
-		messageInput.setBackground(Color.DARK_GRAY);
-		messageInput.setForeground(foregroundColor);
 		messageInput.setFont(font);
 		messageInput.setBorder(empty);
-		messageInput.setCaretColor(foregroundColor);
 		//This is the key listener so the component can listen for the enter key to send the commands
 		messageInput.addKeyListener(new KeyListener(){
 			//unused
@@ -135,18 +133,23 @@ public class ConsoleGraphics extends JFrame
         chatLog.setFont(font);
 		scrollypolly = new JScrollPane(chatLog);
 		chatLog.setEditable(false);
-		chatLog.setForeground(foregroundColor);
-		chatLog.setBackground(backgroundColor);
 		chatLog.setBorder(empty);
 		scrollypolly.setBorder(empty);
 		
-		
-		
-		
-		lowerPanel.setLayout(new GridLayout(2,0, 0, 5));//Contains the lowerPanelbuttons and the inputmessage
-
 		//setting colors
+		getSettings();
+		lowerPanel.setBackground(backgroundColor);
+		
+		messageInput.setBackground(backgroundColor);
+		messageInput.setForeground(foregroundColor);
+		messageInput.setCaretColor(foregroundColor);
+		
 		sendInputButton.setBackground(foregroundColor);
+		
+		setBackground(backgroundColor);
+		
+		chatLog.setForeground(foregroundColor);
+		chatLog.setBackground(backgroundColor);
 		//adding panels
 		lowerPanel.add(messageInput);
 		//adding components to the second panel
@@ -223,7 +226,6 @@ public class ConsoleGraphics extends JFrame
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			theInput = this.checkForInput();
@@ -256,7 +258,6 @@ public class ConsoleGraphics extends JFrame
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			theInput = this.checkForInput();
@@ -315,8 +316,10 @@ public class ConsoleGraphics extends JFrame
 			if(allFonts[i].equalsIgnoreCase(newFont))//if what they typed equals a font type
 			{
 				//set that font and return true
-				chatLog.setFont(new Font(allFonts[i], font.PLAIN, 12));
-				messageInput.setFont(new Font(allFonts[i], font.PLAIN, 12));
+				Font finalizedFont = new Font(allFonts[i], font.PLAIN, 12);
+				chatLog.setFont(finalizedFont);
+				messageInput.setFont(finalizedFont);
+				font = finalizedFont;
 				return true;
 			}
 		}
@@ -324,11 +327,9 @@ public class ConsoleGraphics extends JFrame
 		return false;
 	}
 	
-	public boolean setFontSize(int newFontSize)
+	public void setFontSize(int newFontSize)
 	{
 		chatLog.setFont(new Font(font.getName(), font.PLAIN, newFontSize));
-		//if we got here thats because no fonts matched so return false
-		return false;
 	}
 	
 	public int getFontSize()
@@ -389,16 +390,53 @@ public class ConsoleGraphics extends JFrame
 		ArrayList<String> settingsContent = fileManager.read(settingsFile);
 		if(settingsContent != null && settingsContent.size() > 0)
 		{
-			//index 1-3 have the rgb of the forgound color
-			foregroundColor = new Color(Integer.parseInt(settingsContent.get(0)),
-					Integer.parseInt(settingsContent.get(1)),
-					Integer.parseInt(settingsContent.get(2)));
-			//index 4-6 have the rgb of the background color
-			backgroundColor = new Color(Integer.parseInt(settingsContent.get(3)),
-					Integer.parseInt(settingsContent.get(4)),
-					Integer.parseInt(settingsContent.get(5)));
-		}
+			try {
+				//index 1-3 have the rgb of the forgound color
+				Color tempForeground = new Color(Integer.parseInt(settingsContent.get(0)),
+						Integer.parseInt(settingsContent.get(1)),
+						Integer.parseInt(settingsContent.get(2)));
+				//index 4-6 have the rgb of the background color
+				Color tempBackground = new Color(Integer.parseInt(settingsContent.get(3)),
+						Integer.parseInt(settingsContent.get(4)),
+						Integer.parseInt(settingsContent.get(5)));
+				boolean wasSet = setFontType(settingsContent.get(6));
+				int fontSize = Integer.parseInt(settingsContent.get(7));
+				
+				//Only set everything at the end when we have made sure that its all good
+				foregroundColor = tempForeground;
+				backgroundColor = tempBackground;
+				if(!wasSet)
+				{
+					setFontType("Verdana");
+				}
+				setFontSize(fontSize);
+				loadSettingsSuccessfull = true;
+			} 
+			catch(Exception exc)
+			{
+				createErrorLog(exc);
+			}
+		} 
+	}
+	
+	/**
+	 * This will create a brand new settings file with the default values in them
+	 */
+	public void generateNewSettingsfile()
+	{
+		ArrayList<String> settings = new ArrayList<>();
+		settings.add(Integer.toString(foregroundColor.getRed()));
+		settings.add(Integer.toString(foregroundColor.getGreen()));
+		settings.add(Integer.toString(foregroundColor.getBlue()));
 		
+		settings.add(Integer.toString(backgroundColor.getRed()));
+		settings.add(Integer.toString(backgroundColor.getGreen()));
+		settings.add(Integer.toString(backgroundColor.getBlue()));
+		
+		settings.add(font.getName());
+		settings.add(Integer.toString(font.getSize()));
+		
+		setSettings(settings);
 	}
 	
 	/**
