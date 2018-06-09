@@ -12,7 +12,7 @@ public class ProcessCommands implements Runnable {
 	private String theInput = "";
 	private ArrayList<Plugin> programList = new ArrayList<Plugin>();
 	private PluginLoader loader = new PluginLoader();
-	private ReadWrite fileRW;
+	private String mHeaderAndFooterString = "-------------------------------";
 	/**
 	 * Creates command objects and puts them into an array list
 	 * @param a the MainClass object that this is pointing to
@@ -22,7 +22,6 @@ public class ProcessCommands implements Runnable {
 		theClass = a;
 		//this will load all of the programs and return them in the programlist
 		programList = loader.createAll(theClass);
-		fileRW = new ReadWrite(a);
 	}
 
 
@@ -36,7 +35,7 @@ public class ProcessCommands implements Runnable {
 		{
 			if(programList.get(i).runAtStart)
 			{
-				programList.get(i).run();
+				runPlugin(programList.get(i));
 				break;//we will run only one program at start
 			}
 		}
@@ -56,13 +55,13 @@ public class ProcessCommands implements Runnable {
 			
 			if(theInput.contains("/info"))//get the info for the program
 			{
-				theClass.addToChatLog("-------------------------------");
+				theClass.addToChatLog(mHeaderAndFooterString);
 				theClass.addToChatLog("Multi Function Console Program");
 				theClass.addToChatLog("Version: " + theClass.version);
 				theClass.addToChatLog("Designed and created by Ian Davila");
 				theClass.addToChatLog("For information on the authors of programs");
 				theClass.addToChatLog("please consult the appropriate class files");
-				theClass.addToChatLog("--------------------------------");
+				theClass.addToChatLog(mHeaderAndFooterString);
 			}
 			else if(theInput.contains("/syshelp"))
 			{
@@ -112,22 +111,27 @@ public class ProcessCommands implements Runnable {
 				{
 					if(theInput.equals(programList.get(i).command))//if the program is equal to one of the programs...
 					{
-						theClass.addToChatLog("-------------------------------");
-						try
-						{
-							programList.get(i).run();//lets run the program
-						} 
-						catch (Exception exc)
-						{
-							theClass.addToChatLog("PROGRAM HAS CRASHED!");
-							theClass.addToChatLog("Error type = " + exc.getCause().toString());
-							theClass.addToChatLog("Check the error log file for the stack trace");
-							theClass.createErrorLog(exc);
-						}
-						theClass.addToChatLog("-------------------------------");
+						theClass.addToChatLog(mHeaderAndFooterString);
+						runPlugin(programList.get(i));
+						theClass.addToChatLog(mHeaderAndFooterString);
 					}
 				}
 			}
+		}
+	}
+	
+	private void runPlugin(Plugin pPlugin)
+	{
+		try
+		{
+			pPlugin.run();//lets run the program
+		} 
+		catch (Exception exc)
+		{
+			theClass.addToChatLog("PROGRAM HAS CRASHED!");
+			theClass.addToChatLog("Error type = " + exc.getCause().toString());
+			theClass.addToChatLog("Check the error log file for the stack trace");
+			theClass.createErrorLog(exc);
 		}
 	}
 	/**
